@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WindowsFormsApplication1
+namespace gowinder.http_service
 {
-    class http_service
+    class http_listerner_service
     {
         class my_context
         {
@@ -26,7 +26,7 @@ namespace WindowsFormsApplication1
 
         protected object _lock;
 
-        public http_service()
+        public http_listerner_service()
         {
             _listener = new HttpListener();
             _listener.Prefixes.Add("http://127.0.0.1:9981/test_request/");
@@ -135,7 +135,7 @@ namespace WindowsFormsApplication1
            
         }
 
-        private void process_request(HttpListenerContext ctx, http_service http_service)
+        private void process_request(HttpListenerContext ctx, http_listerner_service http_service)
         {
             Console.WriteLine("process_request, thread={0}, task={1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
 
