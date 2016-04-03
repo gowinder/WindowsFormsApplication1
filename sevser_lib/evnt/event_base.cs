@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gowinder.sevser_lib.evnt
+namespace gowinder.base_lib.evnt
 {
     using System.Collections;
     using event_type = System.String;
@@ -18,7 +18,7 @@ namespace gowinder.sevser_lib.evnt
         netmsg,
     }
 
-    class event_base
+    public class event_base
     {
         public service_base from_service { get; set; }
         public service_base to_service { get; set; }

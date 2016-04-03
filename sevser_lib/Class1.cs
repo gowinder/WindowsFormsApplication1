@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gowinder.sevser_lib
+namespace gowinder.base_lib
 {
     public class Class1
     {

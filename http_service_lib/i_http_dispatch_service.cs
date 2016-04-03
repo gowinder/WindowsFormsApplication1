@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gowinder.base_lib.evnt
+namespace gowinder.http_service_lib
 {
-    public interface i_event_builder
+    public interface i_http_dispatch_service
     {
-        event_base build_event(String event_type);
     }
 }

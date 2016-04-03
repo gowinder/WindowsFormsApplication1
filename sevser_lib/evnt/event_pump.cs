@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace gowinder.sevser_lib.evnt
+namespace gowinder.base_lib.evnt
 {
-    class event_pump : i_event_pump
+    public class event_pump : i_event_pump
     {
         protected Queue<event_base> _queue;
         //protected Queue<event_base> _queue_recycle;

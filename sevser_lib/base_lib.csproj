@@ -7,8 +7,8 @@
     <ProjectGuid>{8802D93E-4AAF-497B-A9CB-068A0D26A66C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gowinder.sevser_lib</RootNamespace>
-    <AssemblyName>gowinder.sevser_lib</AssemblyName>
+    <RootNamespace>gowinder.base_lib</RootNamespace>
+    <AssemblyName>gowinder.base_lib</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

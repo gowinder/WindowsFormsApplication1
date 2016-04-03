@@ -7,10 +7,14 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using gowinder.base_lib;
+using gowinder.server_lib;
+using System.IO;
+using ProtoBuf;
 
 namespace gowinder.http_service
 {
-    class http_listerner_service
+    class http_listerner_service : service_base
     {
         class my_context
         {
@@ -28,10 +32,11 @@ namespace gowinder.http_service
 
         public http_listerner_service()
         {
+            name = "http_listerner_service";
             _listener = new HttpListener();
             _listener.Prefixes.Add("http://127.0.0.1:9981/test_request/");
             dict_context = new Dictionary<uint, my_context>();
-
+            
             _lock = new object();
         }
 
@@ -41,6 +46,7 @@ namespace gowinder.http_service
         protected HttpListener _listener;
         public Task run()
             {
+                init();
                 return Task.Run(() =>
                 {
                     try
@@ -71,6 +77,10 @@ namespace gowinder.http_service
                 });
             }
 
+        private void init()
+        {
+            // todo do the init operation
+        }
 
         Dictionary<uint, my_context> _dict_delete = new Dictionary<uint, my_context>();
         private void sim_process_context()
@@ -139,6 +149,7 @@ namespace gowinder.http_service
         {
             Console.WriteLine("process_request, thread={0}, task={1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
 
+            Stream s = ctx.Request.InputStream;
             uint id = Convert.ToUInt32(ctx.Request.QueryString["id"]);
             long end_time = Convert.ToInt32(ctx.Request.QueryString["sleep"]);
             end_time += utility.get_tick();

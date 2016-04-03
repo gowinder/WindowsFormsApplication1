@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace gowinder.server_lib
 {
-    class utility
+    public class utility
     {
         public static long get_tick()
         {

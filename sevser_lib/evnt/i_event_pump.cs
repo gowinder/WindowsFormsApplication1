@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gowinder.sevser_lib.evnt
+namespace gowinder.base_lib.evnt
 {
-    interface i_event_pump
+    public interface i_event_pump
     {
         void push(event_base e);
         event_base pop();

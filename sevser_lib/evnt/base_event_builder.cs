@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gowinder.sevser_lib.evnt
+namespace gowinder.base_lib.evnt
 {
-    
+
     /// <summary>
     /// 基本事件构造器
     /// </summary>
-    class base_event_builder : i_event_builder
+    public class base_event_builder : i_event_builder
     {
         public event_base build_event(String event_type)
         {

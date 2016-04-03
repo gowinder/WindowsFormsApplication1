@@ -1,10 +1,13 @@
-﻿using System;
+﻿using ProtoBuf;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using WindowsFormsApplication1.data;
 
 namespace WindowsFormsApplication1
 {
@@ -26,6 +29,14 @@ namespace WindowsFormsApplication1
 
         public void test()
         {
+            data_login[] dls =
+            {
+                new data_login() {user_name = "test1",user_pwd = "1234"  },
+                new data_login() { user_name = "test2", user_pwd = "1234"},
+                new data_login() { user_name = "test3", user_pwd = "1234"},
+                new data_login() { user_name = "test4", user_pwd = "1234"},
+                new data_login() { user_name = "test5", user_pwd = "1234"},
+            };
             string[] reqs = new string[5]
             {
                 //"http://www.baidu.com",
@@ -34,15 +45,23 @@ namespace WindowsFormsApplication1
                 //"http://www.readfree.me",
                 //"http://www.v2ex.com"
 
-                "http://127.0.0.1:9981/test_request?id=1&sleep=2000",
-                "http://127.0.0.1:9981/test_request?id=2&sleep=2000",
-                "http://127.0.0.1:9981/test_request?id=3&sleep=2000",
-                "http://127.0.0.1:9981/test_request?id=4&sleep=2000",
-                "http://127.0.0.1:9981/test_request?id=5&sleep=2000"
+                //"http://127.0.0.1:9981/test_request?id=1&sleep=2000&pwd=1234",
+                //"http://127.0.0.1:9981/test_request?id=2&sleep=2000&pwd=1234",
+                //"http://127.0.0.1:9981/test_request?id=3&sleep=2000&pwd=1234",
+                //"http://127.0.0.1:9981/test_request?id=4&sleep=2000&pwd=1234",
+                //"http://127.0.0.1:9981/test_request?id=5&sleep=2000&pwd=1234"
+
+                "http://127.0.0.1:9981/test_request",
+                "http://127.0.0.1:9981/test_request",
+                "http://127.0.0.1:9981/test_request",
+                "http://127.0.0.1:9981/test_request",
+                "http://127.0.0.1:9981/test_request"
             };
-            foreach (var req in reqs)
+            for(int i = 0; i < 5; i++)
             {
-                Task t = Task.Run(() => get_respons_async(req));
+                var req = reqs[i];
+                var dl = dls[i];
+                Task t = Task.Run(() => get_respons_async(req, dl));
                 //                 Task t = new Task(this.get_respons_async, req, TaskCreationOptions.LongRunning);
                 //                 t.Start();
 
@@ -54,12 +73,16 @@ namespace WindowsFormsApplication1
 
 
 
-        protected async void get_respons_async(string req)
+        protected async void get_respons_async(string req, data_login dl)
         {
             var clientHandler = new HttpClientHandler();
             var client = new HttpClient(clientHandler);
             Console.WriteLine("begin request: {0}, task:{1}, thread{2}, ispool:{3}", req, Task.CurrentId, Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsThreadPoolThread);
-            var response = await client.GetAsync(req);
+
+            MemoryStream ms = new MemoryStream();
+            Serializer.Serialize(ms, dl);
+            StreamContent ht = new StreamContent(ms);
+            var response = await client.PostAsync(req, ht);
             string str_respons = await response.Content.ReadAsStringAsync();
 
             Console.WriteLine("recive respons({0}), return:{1}", req, str_respons);

@@ -1,4 +1,4 @@
-﻿using gowinder.sevser_lib.evnt;
+﻿using gowinder.base_lib.evnt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,15 +6,17 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace gowinder.sevser_lib
+namespace gowinder.base_lib
 {
-    class service_base
+    public class service_base
     {
         protected i_event_pump _pump;
         protected int _id;
         protected Thread _thread;
         protected bool _start_own_thread;
 
+
+        public string name { get; set; }
 
         protected virtual i_event_pump create_pump()
         {

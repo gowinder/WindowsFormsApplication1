@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{BBDB646E-DDD1-4151-8E0F-F32350A8ED73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sevser_lib", "sevser_lib\sevser_lib.csproj", "{8802D93E-4AAF-497B-A9CB-068A0D26A66C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "base_lib", "sevser_lib\base_lib.csproj", "{8802D93E-4AAF-497B-A9CB-068A0D26A66C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "http_service_lib", "http_service_lib\http_service_lib.csproj", "{CA5E4A24-085C-4BB9-AE5E-2BC804770F50}"
 EndProject
