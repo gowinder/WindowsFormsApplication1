@@ -10,8 +10,10 @@ namespace gowinder.database
 {
     public interface i_database
     {
-        bool open(string host, string db_name, string db_pwd, int port);
+        void open(string host, string db_name, string user_name, string user_pwd, int port);
 
         MySqlDataReader create_recordset(string str_sql);
+
+        int execute_no_query(string str_sql);
     }
 }

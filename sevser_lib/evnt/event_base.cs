@@ -16,6 +16,7 @@ namespace gowinder.base_lib.evnt
         string_obj,
         json_data,
         netmsg,
+        object_class,
     }
 
     public class event_base
@@ -36,6 +37,16 @@ namespace gowinder.base_lib.evnt
             data = (System.Object)buff;
             parameter_list = parameters;
             data_type = event_data_type.byte_array;
+        }
+
+        public virtual void set(service_base from, service_base to, event_type type, Object obj, ArrayList parameters)
+        {
+            from_service = from;
+            to_service = to;
+            event_type = type;
+            data = (System.Object)obj;
+            parameter_list = parameters;
+            data_type = event_data_type.object_class;
         }
 
         public virtual void send()

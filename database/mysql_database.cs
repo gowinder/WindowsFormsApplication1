@@ -23,5 +23,15 @@ namespace gowinder.database
             MySqlCommand cmd = new MySqlCommand(str_sql, _connection);
             return cmd.ExecuteReader();
         }
+
+        public int execute_no_query(string str_sql)
+        {
+           
+            throw new NotImplementedException(); MySqlCommand cmd = new MySqlCommand(str_sql, _connection);
+          
+            return cmd.ExecuteNonQuery();
+        }
+
+        
     }
 }

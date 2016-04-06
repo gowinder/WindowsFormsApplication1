@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="async_save_db_service.cs" />
     <Compile Include="database_manager.cs" />
+    <Compile Include="evnt\db_event_builder.cs" />
+    <Compile Include="evnt\event_async_save_db.cs" />
     <Compile Include="i_database.cs" />
     <Compile Include="i_database_manager.cs" />
     <Compile Include="mysql_database.cs" />
