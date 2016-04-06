@@ -8,6 +8,6 @@ namespace gowinder.database
 {
     interface i_database_manager
     {
-        i_databae get_database(uint id);
+        i_database get_database(uint id);
     }
 }

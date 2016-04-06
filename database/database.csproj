@@ -50,6 +50,7 @@
     <Compile Include="i_database_manager.cs" />
     <Compile Include="mysql_database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="database_service_base.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

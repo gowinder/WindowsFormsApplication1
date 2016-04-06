@@ -1,4 +1,5 @@
-﻿using System;
+﻿using gowinder.base_lib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace gowinder.database
 {
-    class database_manager : i_database_manager
+    class database_service_base : service_base, i_database_manager
     {
-        Dictionary<uint, i_database> _dict_db;
+        Dictionary<uint, i_database> _dict_db = new Dictionary<uint, i_database>();
 
-        public database_manager()
+        public database_service_base()
         {
             _dict_db = new Dictionary<uint, i_database>();
         }
@@ -26,5 +27,6 @@ namespace gowinder.database
         {
             return _dict_db[id];
         }
+        
     }
 }
