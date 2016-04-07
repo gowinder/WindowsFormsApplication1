@@ -67,8 +67,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="data\data_account.cs" />
+    <Compile Include="data\data_fort.cs" />
+    <Compile Include="data\data_item.cs" />
     <Compile Include="data\data_login.cs" />
     <Compile Include="data\http_request_data.cs" />
+    <Compile Include="data\my_user_manager.cs" />
+    <Compile Include="evnt\event_my_async_load_db_request.cs" />
+    <Compile Include="evnt\event_my_async_load_db_response.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,8 +83,11 @@
     </Compile>
     <Compile Include="http_requst_service.cs" />
     <Compile Include="http_service.cs" />
+    <Compile Include="my_async_load_db_service.cs" />
+    <Compile Include="my_db_event_builder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="service\my_logic_service.cs" />
     <Compile Include="test_log.cs" />
     <Compile Include="utility.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -114,6 +123,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\database\database.csproj">
+      <Project>{b510b71a-a353-4f3a-8290-5f558fa8bc91}</Project>
+      <Name>database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\game_base_lib\game_base_lib.csproj">
+      <Project>{c79ccfa4-872d-4343-bcdf-1c7735ce6ae5}</Project>
+      <Name>game_base_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\http_service_lib\http_service_lib.csproj">
+      <Project>{ca5e4a24-085c-4bb9-ae5e-2bc804770f50}</Project>
+      <Name>http_service_lib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sevser_lib\base_lib.csproj">
       <Project>{8802d93e-4aaf-497b-a9cb-068a0d26a66c}</Project>
       <Name>base_lib</Name>

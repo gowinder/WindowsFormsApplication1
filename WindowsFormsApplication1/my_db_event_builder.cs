@@ -1,13 +1,14 @@
 ﻿using gowinder.base_lib.evnt;
+using gowinder.database.evnt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gowinder.database.evnt
+namespace WindowsFormsApplication1
 {
-    public class db_event_builder : base_event_builder
+    class my_db_event_builder : db_event_builder
     {
         public event_base build_event(String event_type)
         {
@@ -17,13 +18,14 @@ namespace gowinder.database.evnt
 
             switch (event_type)
             {
-                case event_async_save_db.type:
+                case event_async_load_db_request.type:
                     {
-                        return new event_async_save_db();
+                        return new ();
                     }
                 default:
                     return null;
             }
         }
     }
+}
 }

@@ -11,7 +11,7 @@ namespace gowinder.database.evnt
 {
     class async_save_db_info
     {
-        public uint id { get; set; }
+        public uint db_index { get; set; }
         public string sql { get; set; }
     }
 
@@ -21,7 +21,7 @@ namespace gowinder.database.evnt
 
         public void set(service_base from, service_base to, string str_sql, uint db_id)
         {
-            async_save_db_info info = new async_save_db_info() { id = db_id, sql = str_sql };
+            async_save_db_info info = new async_save_db_info() { db_index = db_id, sql = str_sql };
             set(from, to, type, info, null);
         }
 
@@ -35,12 +35,12 @@ namespace gowinder.database.evnt
             if(info == null)
                 throw new Exception("event_async_save_db data is not async_save_db_info");
 
-            i_database db = ser.get_database(info.id);
+            i_database db = ser.get_database(info.db_index);
             if (db == null)
-                throw new Exception(string.Format("event_async_save_db db_id({0} not found", info.id));
+                throw new Exception(string.Format("event_async_save_db db_id({0} not found", info.db_index));
 
             if (db.execute_no_query(info.sql) < 1)
-                throw new Exception(string.Format("event_async_save_db db_id{0} failed, sql:{1}", info.id, info.sql));
+                throw new Exception(string.Format("event_async_save_db db_id{0} failed, sql:{1}", info.db_index, info.sql));
 
         }
     }

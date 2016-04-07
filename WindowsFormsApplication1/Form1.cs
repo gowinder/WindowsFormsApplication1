@@ -15,18 +15,23 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using WindowsFormsApplication1.data;
+using gowinder.database;
 
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
         private http_service service { get; set; }
+        private async_save_db_service async_save_db_service { get;set;}
+        
 
         public Form1()
         {
             InitializeComponent();
             service = new http_service();
             service.run();
+
+             
         }
 
         private void button1_Click(object sender, EventArgs e)

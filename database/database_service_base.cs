@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace gowinder.database
 {
-    class database_service_base : service_base, i_database_manager
+    public class database_service_base : service_base, i_database_manager
     {
         Dictionary<uint, i_database> _dict_db = new Dictionary<uint, i_database>();
 
