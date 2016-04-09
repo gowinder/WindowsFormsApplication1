@@ -13,11 +13,11 @@ namespace WindowsFormsApplication1.evnt
 {
     class event_my_async_load_db_request : event_async_load_db_request
     {
-        protected override Dictionary<string, object> load_need_data(i_database db, uint account_id)
+        protected override Dictionary<string, object> load_need_data(i_db db, uint account_id)
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
             string str_sql = string.Format("select * from game_item where account_id={0}", account_id);
-            MySqlDataReader reader = db.create_recordset(str_sql);
+            MySqlDataReader reader = db.create_reader(str_sql);
             List<data_item> list_item = new List<data_item>();
             while(reader.Read())
             {

@@ -14,13 +14,24 @@ namespace gowinder.base_lib
         protected int _id;
         protected Thread _thread;
         protected bool _start_own_thread;
-
+        
+        public i_event_builder event_builder { get; protected set; }
 
         public string name { get; set; }
 
+        public service_base()
+        {
+            event_builder = on_create_event_builder();
+        }
+
+        protected virtual i_event_builder on_create_event_builder()
+        {
+            return new base_event_builder() as i_event_builder;
+        }
+
         protected virtual i_event_pump create_pump()
         {
-            return new event_pump(_id);
+            return new event_pump(_id, this);
         }
 
         public bool is_running
@@ -64,16 +75,21 @@ namespace gowinder.base_lib
             process_event_pump();
         }
 
-        protected virtual void maintain()
+        protected void maintain()
         {
             try
             {
-
+                on_maintain();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+        }
+
+        protected virtual void on_maintain()
+        {
+             
         }
 
         private string fun_name = "thread_process";

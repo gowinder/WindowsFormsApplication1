@@ -10,34 +10,22 @@ using System.Threading.Tasks;
 using gowinder.base_lib;
 using gowinder.server_lib;
 using System.IO;
+using gowinder.http_service_lib;
 using ProtoBuf;
 
 namespace gowinder.http_service
 {
     class http_listerner_service : service_base
     {
-        class my_context
-        {
-            public my_context(uint i, long ed) { this.id = i;this.end_time = ed; done = false; }
-
-            public uint id { get; set; }
-            public long end_time { get; set; }
-            public HttpListenerContext ctx { get; set; }
-
-            public bool done { get; set; }
-        }
-        Dictionary<uint, my_context> dict_context;
-
-        protected object _lock;
+        public i_net_context_manager context_manager { get; set; }
+       
 
         public http_listerner_service()
         {
             name = "http_listerner_service";
             _listener = new HttpListener();
             _listener.Prefixes.Add("http://127.0.0.1:9981/test_request/");
-            dict_context = new Dictionary<uint, my_context>();
             
-            _lock = new object();
         }
 
         private uint _current_id = 0;
@@ -72,7 +60,7 @@ namespace gowinder.http_service
                                 process_request(ctx, this);
                             });
                         }
-                        sim_process_context();
+                    //    sim_process_context();
                     }
                 });
             }
@@ -81,8 +69,8 @@ namespace gowinder.http_service
         {
             // todo do the init operation
         }
-
-        Dictionary<uint, my_context> _dict_delete = new Dictionary<uint, my_context>();
+        /*
+        Dictionary<uint, net_context> _dict_delete = new Dictionary<uint, net_context>();
         private void sim_process_context()
         {
             lock (_lock)
@@ -101,7 +89,7 @@ namespace gowinder.http_service
                     return;
             }
 
-            Dictionary<uint, my_context> dict_copy = new Dictionary<uint, my_context>();
+            Dictionary<uint, net_context> dict_copy = new Dictionary<uint, net_context>();
             lock(_lock)
             {
                 foreach (var mctx in dict_context.Values)
@@ -144,7 +132,7 @@ namespace gowinder.http_service
 
            
         }
-
+        */
         private void process_request(HttpListenerContext ctx, http_listerner_service http_service)
         {
             Console.WriteLine("process_request, thread={0}, task={1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
@@ -153,13 +141,12 @@ namespace gowinder.http_service
             uint id = Convert.ToUInt32(ctx.Request.QueryString["id"]);
             long end_time = Convert.ToInt32(ctx.Request.QueryString["sleep"]);
             end_time += utility.get_tick();
-            var my_context = new my_context(this.current_id, end_time);
+            var my_context = new http_net_context(this.current_id, end_time);
             my_context.ctx = ctx;
 
-            lock(_lock)
-            {
-                dict_context.Add(my_context.id, my_context);
-            }
+
+            context_manager.add_context(my_context);
+            
             
 
         }

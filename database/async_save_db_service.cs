@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace gowinder.database
 {
-    public class async_save_db_service : database_service_base
+    public class async_save_db_service : db_service_base
     {
         public async_save_db_service(string service_name)
         {

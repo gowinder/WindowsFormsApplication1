@@ -35,7 +35,7 @@ namespace gowinder.database.evnt
             if(info == null)
                 throw new Exception("event_async_save_db data is not async_save_db_info");
 
-            i_database db = ser.get_database(info.db_index);
+            i_db db = ser.get_database(info.db_index);
             if (db == null)
                 throw new Exception(string.Format("event_async_save_db db_id({0} not found", info.db_index));
 

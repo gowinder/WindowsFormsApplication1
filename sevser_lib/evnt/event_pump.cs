@@ -15,6 +15,7 @@ namespace gowinder.base_lib.evnt
         protected Object _locker;
         protected ManualResetEvent _waiter;
         protected bool _is_open = false;
+        public service_base service {get;protected set;}
 
 
         protected int _id;
@@ -26,16 +27,16 @@ namespace gowinder.base_lib.evnt
             }
         }
 
-        public i_event_builder event_builder { get; set; }
 
-        public event_pump(int id)
+        public event_pump(int id, service_base ser)
         {
             _id = id;
             _waiter = new ManualResetEvent(false);
             _locker = new Object();
             _queue = new Queue<event_base>();
             _map_recycle = new Dictionary<String, Queue<event_base>>();
-            event_builder = new base_event_builder();
+            //event_builder = new base_event_builder();
+            service = ser;
         }
 
 
@@ -132,7 +133,7 @@ namespace gowinder.base_lib.evnt
                         return queue_recyle.Dequeue();
                 }
                 else
-                    return event_builder.build_event(event_type);
+                    return service.event_builder.build_event(event_type);
             }
 
             return null;

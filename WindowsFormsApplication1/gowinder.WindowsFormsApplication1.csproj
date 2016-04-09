@@ -123,21 +123,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\database\database.csproj">
+    <ProjectReference Include="..\database\gowinder.database.csproj">
       <Project>{b510b71a-a353-4f3a-8290-5f558fa8bc91}</Project>
-      <Name>database</Name>
+      <Name>gowinder.database</Name>
     </ProjectReference>
-    <ProjectReference Include="..\game_base_lib\game_base_lib.csproj">
+    <ProjectReference Include="..\game_base_lib\gowinder.game_base_lib.csproj">
       <Project>{c79ccfa4-872d-4343-bcdf-1c7735ce6ae5}</Project>
-      <Name>game_base_lib</Name>
+      <Name>gowinder.game_base_lib</Name>
     </ProjectReference>
     <ProjectReference Include="..\http_service_lib\http_service_lib.csproj">
       <Project>{ca5e4a24-085c-4bb9-ae5e-2bc804770f50}</Project>
       <Name>http_service_lib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\sevser_lib\base_lib.csproj">
+    <ProjectReference Include="..\sevser_lib\gowinder.base_lib.csproj">
       <Project>{8802d93e-4aaf-497b-a9cb-068a0d26a66c}</Project>
-      <Name>base_lib</Name>
+      <Name>gowinder.base_lib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

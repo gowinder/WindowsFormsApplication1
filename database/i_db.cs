@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace gowinder.database
 {
-    public interface i_database
+    public interface i_db
     {
         void open(string host, string db_name, string user_name, string user_pwd, int port);
 
-        MySqlDataReader create_recordset(string str_sql);
+        MySqlDataReader create_reader(string str_sql);
 
         int execute_no_query(string str_sql);
     }

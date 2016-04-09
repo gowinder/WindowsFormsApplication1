@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace gowinder.database
 {
-    class mysql_database : i_database
+    class mysql_database : i_db
     {
         MySqlConnection _connection;
 
@@ -18,7 +18,7 @@ namespace gowinder.database
             _connection.Open();
         }
 
-        public MySqlDataReader create_recordset(string str_sql)
+        public MySqlDataReader create_reader(string str_sql)
         {
             MySqlCommand cmd = new MySqlCommand(str_sql, _connection);
             return cmd.ExecuteReader();

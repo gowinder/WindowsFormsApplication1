@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace gowinder.database
 {
-    interface i_database_manager
+    interface i_db_manager
     {
-        i_database get_database(uint id);
+        i_db get_database(uint id);
     }
 }

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace gowinder.database
 {
-    public class database_service_base : service_base, i_database_manager
+    public class db_service_base : service_base, i_db_manager
     {
-        Dictionary<uint, i_database> _dict_db = new Dictionary<uint, i_database>();
+        Dictionary<uint, i_db> _dict_db = new Dictionary<uint, i_db>();
 
-        public database_service_base()
+        public db_service_base()
         {
-            _dict_db = new Dictionary<uint, i_database>();
+            _dict_db = new Dictionary<uint, i_db>();
         }
 
         public void init()
@@ -23,7 +23,7 @@ namespace gowinder.database
             _dict_db.Add(1, db);
         }
 
-        public i_database get_database(uint id)
+        public i_db get_database(uint id)
         {
             return _dict_db[id];
         }

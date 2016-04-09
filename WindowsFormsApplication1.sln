@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{BBDB646E-DDD1-4151-8E0F-F32350A8ED73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gowinder.WindowsFormsApplication1", "WindowsFormsApplication1\gowinder.WindowsFormsApplication1.csproj", "{BBDB646E-DDD1-4151-8E0F-F32350A8ED73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "base_lib", "sevser_lib\base_lib.csproj", "{8802D93E-4AAF-497B-A9CB-068A0D26A66C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gowinder.base_lib", "sevser_lib\gowinder.base_lib.csproj", "{8802D93E-4AAF-497B-A9CB-068A0D26A66C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "http_service_lib", "http_service_lib\http_service_lib.csproj", "{CA5E4A24-085C-4BB9-AE5E-2BC804770F50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "database", "database\database.csproj", "{B510B71A-A353-4F3A-8290-5F558FA8BC91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gowinder.database", "database\gowinder.database.csproj", "{B510B71A-A353-4F3A-8290-5F558FA8BC91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "game_base_lib", "game_base_lib\game_base_lib.csproj", "{C79CCFA4-872D-4343-BCDF-1C7735CE6AE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gowinder.game_base_lib", "game_base_lib\gowinder.game_base_lib.csproj", "{C79CCFA4-872D-4343-BCDF-1C7735CE6AE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gowinder.net_base", "gowinder.net_base\gowinder.net_base.csproj", "{A1A06DEE-31AF-41F3-AC82-33E5E345D6BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C79CCFA4-872D-4343-BCDF-1C7735CE6AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C79CCFA4-872D-4343-BCDF-1C7735CE6AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C79CCFA4-872D-4343-BCDF-1C7735CE6AE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1A06DEE-31AF-41F3-AC82-33E5E345D6BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1A06DEE-31AF-41F3-AC82-33E5E345D6BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1A06DEE-31AF-41F3-AC82-33E5E345D6BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1A06DEE-31AF-41F3-AC82-33E5E345D6BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

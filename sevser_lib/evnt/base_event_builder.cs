@@ -12,7 +12,7 @@ namespace gowinder.base_lib.evnt
     /// </summary>
     public class base_event_builder : i_event_builder
     {
-        public event_base build_event(String event_type)
+        public virtual event_base build_event(String event_type)
         {
             switch (event_type)
             {

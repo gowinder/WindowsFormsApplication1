@@ -36,7 +36,7 @@ namespace gowinder.database.evnt
             if (info == null)
                 throw new Exception("async_load_db_service data is not async_save_db_info");
 
-            i_database db = ser.get_database(info.db_index);
+            i_db db = ser.get_database(info.db_index);
             if (db == null)
                 throw new Exception(string.Format("async_load_db_service db_id({0} not found", info.db_index));
 
@@ -49,6 +49,6 @@ namespace gowinder.database.evnt
             res.send();
         }
 
-        abstract protected Dictionary<string, object> load_need_data(i_database db, uint account_id);
+        abstract protected Dictionary<string, object> load_need_data(i_db db, uint account_id);
     }
 }

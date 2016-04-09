@@ -1,12 +1,14 @@
-﻿using gowinder.database.evnt;
+﻿using gowinder.database;
+using gowinder.database.evnt;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
-namespace gowinder.game_base_lib.account
+namespace gowinder.game_base_lib.data
 {
     public class user_manager
     {
@@ -28,7 +30,26 @@ namespace gowinder.game_base_lib.account
 
         public virtual void init()
         {
-            
+            string str_sql = string.Format("select * from account");
+            i_db db = service.get_database(1);
+            MySqlDataReader reader = db.create_reader(str_sql);
+            while (reader.Read())
+            {
+                data_default_account account = on_create_account();
+                account.read_from_dataset(reader);
+                insert_account(account);
+            }
+        }
+
+        protected void insert_account(data_default_account account)
+        {
+            dict_account.Add(account.id, account);
+            dict_account_unique_name.Add(account.full_name, account);
+        }
+
+        protected virtual data_default_account on_create_account()
+        {
+            return new data_default_account();
         }
 
         public virtual data_default_account find_account_by_id(uint account_id)
