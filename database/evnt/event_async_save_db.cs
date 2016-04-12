@@ -9,15 +9,22 @@ using System.Threading.Tasks;
 
 namespace gowinder.database.evnt
 {
+    [Serializable]
     class async_save_db_info
     {
         public uint db_index { get; set; }
         public string sql { get; set; }
     }
 
+    [Serializable]
     class event_async_save_db : event_base
     {
         public const String type = "event_async_save_db";
+
+        public event_async_save_db() : base(type)
+        {
+            
+        }
 
         public void set(service_base from, service_base to, string str_sql, uint db_id)
         {

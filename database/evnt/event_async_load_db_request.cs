@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace gowinder.database.evnt
 {
+    [Serializable]
     public class async_load_db_request
     {
         public int type { get; set; }
@@ -17,9 +18,15 @@ namespace gowinder.database.evnt
         public uint db_index { get; set; }
     }
 
-    abstract public class event_async_load_db_request : event_base
+    [Serializable]
+    public abstract class event_async_load_db_request : event_base
     {
         public const String type = "event_async_load_db_request";
+
+        public event_async_load_db_request() : base(type)
+        {
+            
+        }
 
         public void set(service_base from, service_base to, async_load_db_request request_info)
         {
@@ -49,6 +56,6 @@ namespace gowinder.database.evnt
             res.send();
         }
 
-        abstract protected Dictionary<string, object> load_need_data(i_db db, uint account_id);
+        protected abstract Dictionary<string, object> load_need_data(i_db db, uint account_id);
     }
 }

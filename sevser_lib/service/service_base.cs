@@ -13,7 +13,7 @@ namespace gowinder.base_lib
         protected i_event_pump _pump;
         protected int _id;
         protected Thread _thread;
-        protected bool _start_own_thread;
+        public bool start_own_thread { get; set; }
         
         public i_event_builder event_builder { get; protected set; }
 
@@ -60,12 +60,18 @@ namespace gowinder.base_lib
 
         public void thread_process()
         {
+            on_process_start();
             while (true)
             {
                 if (is_running)
                     go_tick();
             }
 
+        }
+
+        protected virtual void on_process_start()
+        {
+            
         }
 
         protected void go_tick()
@@ -94,14 +100,14 @@ namespace gowinder.base_lib
 
         private string fun_name = "thread_process";
 
-        public void start_service(bool start_own_thread)
+        public void start_service()
         {
             if (is_running)
                 return;
 
             _pump = create_pump();
             _pump.open();
-            _start_own_thread = start_own_thread;
+            
             service_thread t = new service_thread(this);
             ThreadStart threadDelegate = new ThreadStart(t.proc);
             if (start_own_thread)
@@ -121,7 +127,7 @@ namespace gowinder.base_lib
                 return;
 
             _pump = null;
-            if (_start_own_thread)
+            if (start_own_thread)
             {
                 if (_thread != null)
                     _thread.Abort();
@@ -165,7 +171,7 @@ namespace gowinder.base_lib
                 DateTime dt_end = DateTime.Now;
                 TimeSpan ts = dt_end - dt_start;
 
-                if (ts.Milliseconds < INTERVAL && _start_own_thread)
+                if (ts.Milliseconds < INTERVAL && start_own_thread)
                     _pump.wait(INTERVAL - ts.Milliseconds);
             }
             catch (Exception e)

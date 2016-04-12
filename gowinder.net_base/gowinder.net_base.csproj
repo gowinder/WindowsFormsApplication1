@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="evnt\event_receive_msg.cs" />
-    <Compile Include="evnt\event_send_msg.cs" />
+    <Compile Include="evnt\event_receive_package.cs" />
+    <Compile Include="evnt\event_send_package.cs" />
+    <Compile Include="i_net_package_parser.cs" />
     <Compile Include="net_context.cs" />
+    <Compile Include="net_package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

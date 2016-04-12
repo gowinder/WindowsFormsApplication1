@@ -9,7 +9,7 @@ namespace gowinder.database.evnt
 {
     public class db_event_builder : base_event_builder
     {
-        public event_base build_event(String event_type)
+        public override event_base build_event(String event_type)
         {
             event_base e = base.build_event(event_type);
             if (e != null)

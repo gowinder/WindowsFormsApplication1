@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +21,8 @@ namespace gowinder.base_lib.evnt
         object_class,
     }
 
-    public class event_base
+    [Serializable]
+    public abstract class event_base : ICloneable
     {
         public service_base from_service { get; set; }
         public service_base to_service { get; set; }
@@ -28,6 +31,11 @@ namespace gowinder.base_lib.evnt
         public event_data_type data_type { get; set; }
         public ArrayList parameter_list { get; set; }
         public i_event_pump owner_pump { get; set; }
+
+        public event_base(event_type type)
+        {
+            event_type = type;
+        }
 
         public virtual void set(service_base from, service_base to, event_type type, byte[] buff, ArrayList parameters)
         {
@@ -69,6 +77,23 @@ namespace gowinder.base_lib.evnt
         public virtual void process()
         {
 
+        }
+
+        public object Clone()
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(ms, this);
+            ms.Seek(0, SeekOrigin.Begin);
+            return bf.Deserialize(ms);
+        }
+
+        public MemoryStream get_memory_stream()
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(ms, this);
+            return ms;
         }
     }
 }

@@ -9,10 +9,10 @@ using WindowsFormsApplication1.service;
 
 namespace WindowsFormsApplication1.data
 {
-    class my_user_manager : user_manager
+    public class my_account_manager : account_manager
     {
 
-        public my_user_manager(my_logic_service ser) : base(ser)
+        public my_account_manager(my_logic_service ser) : base(ser)
         {
 
         }
@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1.data
             async_load_db_response res = response.data as async_load_db_response;
             data_account account = find_account_by_id(res.account_id) as data_account;
             if (account == null)
-                throw new Exception("my_user_manager.rev_async_load_data not found account");
+                throw new Exception("my_account_manager.rev_async_load_data not found account");
             Dictionary<string, object> load_data = response.data as Dictionary<string, object>;
             foreach (var key in load_data.Keys)
             {

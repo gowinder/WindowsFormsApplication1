@@ -7,15 +7,22 @@ using gowinder.base_lib.evnt;
 
 namespace gowinder.http_service_lib.evnt
 {
-    public class send_msg_info
+    [Serializable]
+    public class send_package_info
     {
         
         public net_context context { get; set; }
         private byte[] buffer { get; set; }
     }
 
-    public class event_send_msg : event_base
+    [Serializable]
+    public class event_send_package : event_base
     {
-        public const string type = "event_send_msg";
+        public const string type = "event_send_package";
+
+        public event_send_package() : base(type)
+        {
+            
+        }
     }
 }

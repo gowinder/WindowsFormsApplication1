@@ -57,7 +57,7 @@ namespace WindowsFormsApplication1
                 "http://127.0.0.1:9981/test_request",
                 "http://127.0.0.1:9981/test_request"
             };
-            for(int i = 0; i < 5; i++)
+            for(int i = 0; i < dls.Length; i++)
             {
                 var req = reqs[i];
                 var dl = dls[i];
@@ -78,14 +78,21 @@ namespace WindowsFormsApplication1
             var clientHandler = new HttpClientHandler();
             var client = new HttpClient(clientHandler);
             Console.WriteLine("begin request: {0}, task:{1}, thread{2}, ispool:{3}", req, Task.CurrentId, Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsThreadPoolThread);
+            try
+            {
 
-            MemoryStream ms = new MemoryStream();
-            Serializer.Serialize(ms, dl);
-            StreamContent ht = new StreamContent(ms);
-            var response = await client.PostAsync(req, ht);
-            string str_respons = await response.Content.ReadAsStringAsync();
+                MemoryStream ms = new MemoryStream();
+                Serializer.Serialize(ms, dl);
+                StreamContent ht = new StreamContent(ms);
+                var response = await client.PostAsync(req, ht);
+                string str_respons = await response.Content.ReadAsStringAsync();
 
-            Console.WriteLine("recive respons({0}), return:{1}", req, str_respons);
+                Console.WriteLine("recive respons({0}), return:{1}", req, str_respons);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("receive respons crash: " + ex.Message);
+            }
         }
     }
 }

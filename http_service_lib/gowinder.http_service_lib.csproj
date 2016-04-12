@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="evnt\event_http_send_msg.cs" />
+    <Compile Include="evnt\event_http_send_package.cs" />
     <Compile Include="http_listerner_service.cs" />
     <Compile Include="http_net_context.cs" />
     <Compile Include="http_service.cs" />

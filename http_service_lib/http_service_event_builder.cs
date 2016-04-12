@@ -19,9 +19,9 @@ namespace gowinder.http_service_lib
 
             switch (event_type)
             {
-                case event_send_msg.type:
+                case event_send_package.type:
                 {
-                    return new event_http_send_msg();
+                    return new event_http_send_package();
                 }
                     break;
 

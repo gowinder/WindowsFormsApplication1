@@ -33,7 +33,7 @@ namespace gowinder.http_service_lib
             return new http_service_event_builder() as i_event_builder;;
         }
 
-        public void send_response(send_msg_info info)
+        public void send_response(send_package_info info)
         {
             http_net_context mctx = info.context as http_net_context;
             if(mctx == null)

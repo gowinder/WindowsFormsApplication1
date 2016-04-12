@@ -17,16 +17,16 @@ namespace gowinder.game_base_lib
 
         protected virtual void build_user_manager()
         {
-            this.user_manager = new user_manager(this);
+            this.account_manager = new account_manager(this);
         }
 
-        public user_manager user_manager { get; protected set; }
+        public account_manager account_manager { get; protected set; }
 
 
 
-        public void receive_msg(event_receive_msg msg)
+        public virtual void receive_package(event_receive_package package)
         {
-            receive_msg_info msg_info = msg.data as receive_msg_info;
+            receive_package_info package_info = package.data as receive_package_info;
             
         }
     }

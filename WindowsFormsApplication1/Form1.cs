@@ -15,7 +15,11 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using WindowsFormsApplication1.data;
+using WindowsFormsApplication1.service;
+using gowinder.base_lib.service;
 using gowinder.database;
+using gowinder.http_service;
+using gowinder.http_service_lib;
 
 namespace WindowsFormsApplication1
 {
@@ -28,9 +32,6 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
-            service = new http_service();
-            service.run();
-
              
         }
 
@@ -96,6 +97,18 @@ namespace WindowsFormsApplication1
                 }
             }
             rdr.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            http_service http_ser = new http_service() {start_own_thread = true};
+            my_logic_service logic_ser = new my_logic_service() {start_own_thread = true};
+            service_manager.instance().add_service(http_ser);
+            service_manager.instance().add_service(new http_listerner_service() { start_own_thread = true, context_manager = http_ser, receive_package_service = logic_ser });
+            service_manager.instance().add_service(logic_ser);
+
+            service_manager.instance().start_all();
+            
         }
     }
 }
