@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="net_package_type.cs" />
     <Compile Include="evnt\event_receive_package.cs" />
     <Compile Include="evnt\event_send_package.cs" />
     <Compile Include="i_net_package_parser.cs" />

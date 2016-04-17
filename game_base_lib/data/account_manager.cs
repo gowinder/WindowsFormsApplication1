@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using gowinder.net_base;
 using MySql.Data.MySqlClient;
 
 namespace gowinder.game_base_lib.data
@@ -14,6 +15,8 @@ namespace gowinder.game_base_lib.data
     {
         public Dictionary<uint, data_default_account> dict_account { get; protected set; }
         public Dictionary<string, data_default_account> dict_account_unique_name { get; protected set; }
+        public Dictionary<string, data_default_account> dict_token { get; protected set; } 
+        public Dictionary<uint, data_default_account> dict_socket_id { get; protected set; }
 
         public logic_service service {get; protected set;}
         public account_manager(logic_service ser)
@@ -21,6 +24,8 @@ namespace gowinder.game_base_lib.data
             service = ser;
             dict_account = new Dictionary<uint, data_default_account>();
             dict_account_unique_name = new Dictionary<string, data_default_account>();
+            dict_token = new Dictionary<string, data_default_account>();
+            dict_socket_id = new Dictionary<uint, data_default_account>();
         }
 
         public virtual void rev_async_load_data(event_async_load_db_response response)
@@ -68,8 +73,40 @@ namespace gowinder.game_base_lib.data
             return find_account_by_full_name(full_name);
         }
 
-        public account_check_login_result check_login()
+        public virtual data_default_account find_account_by_token(string token)
         {
+            return dict_token[token];
+        }
+
+        public virtual data_default_account find_account_by_socket_id(uint socket_id)
+        {
+            return dict_socket_id[socket_id];
+        }
+
+        public account_check_login_result check_login(net_package package)
+        {
+            if ((net_package_type)package.type == net_package_type.login)
+            {
+                
+            }
+            else
+            {
+                if(package.token == "")
+                    return account_check_login_result.token_timeout;
+                else
+                {
+                    data_default_account account = find_account_by_token(package.token);
+                    if (account == null)
+                        return account_check_login_result.token_timeout;
+                    else
+                    {
+                        var span = DateTime.Now - account.last_operation_date;
+                        if(span.TotalSeconds >= 30 * 60)
+                            return account_check_login_result.token_timeout;
+                    }
+                }
+            }
+            return account_check_login_result.login_ok;
             
         }
     }

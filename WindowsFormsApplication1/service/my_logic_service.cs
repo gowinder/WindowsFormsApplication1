@@ -40,8 +40,12 @@ namespace WindowsFormsApplication1.service
 
         private void process_action_package(net_package package)
         {
-            account_check_login_result result = account_manager.check_login();
+            account_check_login_result result = account_manager.check_login(package);
             if (result == account_check_login_result.need_remote_check)
+            {
+                if()
+            }
+            else
             {
                 
             }
