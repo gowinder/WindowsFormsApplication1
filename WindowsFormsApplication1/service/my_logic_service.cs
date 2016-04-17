@@ -43,7 +43,7 @@ namespace WindowsFormsApplication1.service
             account_check_login_result result = account_manager.check_login(package);
             if (result == account_check_login_result.need_remote_check)
             {
-                if()
+                
             }
             else
             {
