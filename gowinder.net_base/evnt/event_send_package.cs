@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using gowinder.base_lib.evnt;
+using gowinder.base_lib;
+using gowinder.net_base;
 
 namespace gowinder.http_service_lib.evnt
 {
@@ -23,6 +25,13 @@ namespace gowinder.http_service_lib.evnt
         public event_send_package() : base(type)
         {
             
+        }
+
+        public void set(service_base from_ser, service_base to_ser, net_package package)
+        {
+            from_service = from_ser;
+            to_service = to_ser;
+            this.data = package;
         }
     }
 }
