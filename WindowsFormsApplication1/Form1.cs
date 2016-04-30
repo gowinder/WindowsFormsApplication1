@@ -56,7 +56,7 @@ namespace WindowsFormsApplication1
             var json = serializer.Serialize(dl);
             Console.WriteLine(json);
 
-            string str_json = @"{""user_name"":""test1"",""user_pwd"":""1234"",""action_type"":1,""ret"":0, ""fuck"":""asdf""}";
+            string str_json = @"{""user_name"":""test1"",""user_pwd"":""1234"",""type"":1,,""sub_type"":1,""_i"":1,""ret"":0, ""fuck"":""asdf""}";
             JObject jo = (JObject)JsonConvert.DeserializeObject(str_json);
             string zone = jo["fuck"].ToString();
 
@@ -105,8 +105,16 @@ namespace WindowsFormsApplication1
         {
             http_service http_ser = new http_service() {start_own_thread = true};
             my_logic_service logic_ser = new my_logic_service() {start_own_thread = true};
+            http_listerner_service http_listerner_ser = new http_listerner_service()
+            {
+                start_own_thread = true,
+                context_manager = http_ser,
+                receive_package_service = logic_ser
+            };
+
+            http_listerner_ser.net_package_parser = new my_net_package_parser(http_listerner_ser);
             service_manager.instance().add_service(http_ser);
-            service_manager.instance().add_service(new http_listerner_service() { start_own_thread = true, context_manager = http_ser, receive_package_service = logic_ser });
+            service_manager.instance().add_service(http_listerner_ser);
             service_manager.instance().add_service(logic_ser);
 
             service_manager.instance().start_all();

@@ -44,6 +44,10 @@ namespace WindowsFormsApplication1.service
             {
                 
             }
+            else if(result == account_check_login_result.login_ok)
+            {
+                
+            }
             else
             {
                 
