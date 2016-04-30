@@ -44,6 +44,8 @@ namespace WindowsFormsApplication1
 
             http_requst_service h = new http_requst_service();
             h.test();
+
+            h.test_login();
         }
 
         private void button2_Click(object sender, EventArgs e)

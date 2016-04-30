@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WindowsFormsApplication1.data;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace WindowsFormsApplication1
 {
@@ -80,7 +82,6 @@ namespace WindowsFormsApplication1
             Console.WriteLine("begin request: {0}, task:{1}, thread{2}, ispool:{3}", req, Task.CurrentId, Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsThreadPoolThread);
             try
             {
-
                 MemoryStream ms = new MemoryStream();
                 Serializer.Serialize(ms, dl);
                 StreamContent ht = new StreamContent(ms);
@@ -93,6 +94,37 @@ namespace WindowsFormsApplication1
             {
                 Console.WriteLine("receive respons crash: " + ex.Message);
             }
+        }
+
+        protected async void get_response_async(string req, string reqesut_data)
+        {
+            var clientHandler = new HttpClientHandler();
+            var client = new HttpClient(clientHandler);
+            Console.WriteLine("begin request: {0}, task:{1}, thread{2}, ispool:{3}", req, Task.CurrentId, Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsThreadPoolThread);
+            try
+            {
+                MemoryStream ms = new MemoryStream();
+                Serializer.Serialize(ms, reqesut_data);
+                StreamContent ht = new StreamContent(ms);
+                
+                var response = await client.PostAsync(req, ht);
+                string str_respons = await response.Content.ReadAsStringAsync();
+
+                Console.WriteLine("recive respons({0}), return:{1}", req, str_respons);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("receive respons crash: " + ex.Message);
+            }
+        }
+
+        public void test_login()
+        {
+            string str_json = @"{""user_name"":""test1"",""user_pwd"":""1234"",""action_type"":1,""ret"":0, ""fuck"":""asdf""}";
+            JObject jo = (JObject)JsonConvert.DeserializeObject(str_json);
+            string zone = jo["fuck"].ToString();
+
+            Task t = Task.Run(() => get_response_async("http://127.0.0.1:9981/test_request", str_json));
         }
     }
 }

@@ -14,9 +14,6 @@ namespace WindowsFormsApplication1.service
 {
     public class my_logic_service : logic_service
     {
-
-
-
         protected override void build_user_manager()
         {
             account_manager = new my_account_manager(this);
@@ -25,6 +22,8 @@ namespace WindowsFormsApplication1.service
         public override void receive_package(event_receive_package package)
         {
             receive_package_info info = package.data as receive_package_info;
+            if(info == null)
+                throw new Exception("my_logic_service.receive_package package.data is not receive_package_info");
             if(!info.package.is_parsed)
                 throw new Exception("my_logic_service.receive_package package is not parsed");
 
