@@ -108,12 +108,9 @@ namespace gowinder.http_service
 
             if (input_text != "")
             {
-                System.Text.Encoding encoding = ctx.Request.ContentEncoding;
-                System.IO.StreamReader reader = new System.IO.StreamReader(s, encoding);
+                net_package p = net_package_parser.parse(input_text);
 
-                net_package p = net_package_parser.parse(reader.ReadToEnd());
-
-                event_receive_package e = receive_package_service.get_new_event(event_http_receive_package.type) as event_receive_package;
+                event_receive_package e = receive_package_service.get_new_event(event_receive_package.type) as event_receive_package;
                 receive_package_info info = new receive_package_info() {context = my_context,package = p};
                 e.set(this, receive_package_service, info);
                 e.send();

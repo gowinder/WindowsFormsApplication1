@@ -4,12 +4,16 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using gowinder.net_base;
 
 namespace gowinder.http_service_lib.evnt
 {
     [Serializable]
     public class event_http_send_package : event_send_package
     {
+        public event_http_send_package()
+        {
+        }
         public override void process()
         {
             http_service service = to_service as http_service;

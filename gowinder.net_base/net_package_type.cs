@@ -10,8 +10,7 @@ namespace gowinder.net_base
     {
         echo = 0,
         notification = 1,
-        login = 2,
-        action = 3,
+        action = 2,
         query = 4,
         gm_action = 5,
         gm_query = 6,

@@ -11,7 +11,6 @@ namespace gowinder.base_lib
     public class service_base
     {
         protected i_event_pump _pump;
-        protected int _id;
         protected Thread _thread;
         public bool start_own_thread { get; set; }
         
@@ -31,7 +30,7 @@ namespace gowinder.base_lib
 
         protected virtual i_event_pump create_pump()
         {
-            return new event_pump(_id, this);
+            return new event_pump(name, this);
         }
 
         public bool is_running
@@ -63,6 +62,13 @@ namespace gowinder.base_lib
             on_process_start();
             while (true)
             {
+
+
+                if (name == "async_load_db_service")
+                {
+                    int zzz = 0;
+                }
+
                 if (is_running)
                     go_tick();
             }
@@ -107,6 +113,8 @@ namespace gowinder.base_lib
 
             _pump = create_pump();
             _pump.open();
+
+            this.init();
             
             service_thread t = new service_thread(this);
             ThreadStart threadDelegate = new ThreadStart(t.proc);
@@ -119,6 +127,11 @@ namespace gowinder.base_lib
             {
 //                this.InvokeRepeating(fun_name, 0.1f, 1.0f);
             }
+        }
+
+        protected virtual void init()
+        {
+           
         }
 
         public void stop_service()

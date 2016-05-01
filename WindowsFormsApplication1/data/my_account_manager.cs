@@ -17,12 +17,10 @@ namespace WindowsFormsApplication1.data
 
         }
 
-        public override void rev_async_load_data(event_async_load_db_response response)
+        protected override void on_rev_async_load_data(data_default_account default_account, event_async_load_db_response response)
         {
-            async_load_db_response res = response.data as async_load_db_response;
-            data_account account = find_account_by_id(res.account_id) as data_account;
-            if (account == null)
-                throw new Exception("my_account_manager.rev_async_load_data not found account");
+            data_account account = default_account as data_account;
+            
             Dictionary<string, object> load_data = response.data as Dictionary<string, object>;
             foreach (var key in load_data.Keys)
             {
@@ -40,10 +38,6 @@ namespace WindowsFormsApplication1.data
                         break;
                 }
             }
-
-            account.full_loaded = true;
-
-            async_load_queue.resume_process_wait_holder(account.id);
         }
 
         public override void init()

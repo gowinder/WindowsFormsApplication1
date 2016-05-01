@@ -15,7 +15,7 @@ namespace WindowsFormsApplication1.data
         public uint id { get; set; }
         public uint account_id { get; set; }
         public uint item_type { get; set; }
-        public int item_count { get; set; }
+        public uint item_count { get; set; }
 
         public data_item()
         {
@@ -27,7 +27,7 @@ namespace WindowsFormsApplication1.data
             id = (uint)reader[0];
             account_id = (uint)reader[1];
             item_type = (uint)reader[2];
-            item_count = (int)reader[3];
+            item_count = (uint)reader[3];
         }
     }
 }

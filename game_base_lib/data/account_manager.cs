@@ -37,6 +37,20 @@ namespace gowinder.game_base_lib.data
 
         public virtual void rev_async_load_data(event_async_load_db_response response)
         {
+            async_load_db_response res = response.data as async_load_db_response;
+            data_default_account account = find_account_by_id(res.account_id);
+            if (account == null)
+                throw new Exception("my_account_manager.rev_async_load_data not found account");
+
+            on_rev_async_load_data(account, response);
+
+            account.full_loaded = true;
+
+            async_load_queue.resume_process_wait_holder(account.id);
+        }
+
+        protected virtual void on_rev_async_load_data(data_default_account defalt_account, event_async_load_db_response response)
+        {
             throw new NotImplementedException();
         }
 
@@ -66,12 +80,16 @@ namespace gowinder.game_base_lib.data
 
         public virtual data_default_account find_account_by_id(uint account_id)
         {
-            return dict_account[account_id];
+            if (dict_account.ContainsKey(account_id))
+                return dict_account[account_id];
+            return null;
         }
 
         public virtual data_default_account find_account_by_full_name(string full_name)
         {
-            return dict_account_unique_name[full_name];
+            if (dict_account_unique_name.ContainsKey(full_name))
+                return dict_account_unique_name[full_name];
+            return null;
         }
 
         public virtual data_default_account find_account_by_platform_and_user_id(uint platform_id, string platform_user_id)
@@ -82,21 +100,25 @@ namespace gowinder.game_base_lib.data
 
         public virtual data_default_account find_account_by_token(string token)
         {
-            return dict_token[token];
+            if (dict_token.ContainsKey(token))
+                return dict_token[token];
+            return null;
         }
 
         public virtual data_default_account find_account_by_socket_id(uint socket_id)
         {
-            return dict_socket_id[socket_id];
+            if (dict_socket_id.ContainsKey(socket_id))
+                return dict_socket_id[socket_id];
+            return null;
         }
 
         public account_check_login_result check_login(net_package package)
         {
-            if ((net_package_type)package.type == net_package_type.login)
-            {
-
-            }
-            else
+            //             if ((net_package_type)package.type == net_package_type.login)
+            //             {
+            // 
+            //             }
+            //             else
             {
                 if (package.token == "")
                     return account_check_login_result.token_timeout;
@@ -129,9 +151,9 @@ namespace gowinder.game_base_lib.data
             if (!account.full_loaded)
             {
                 //  TODO LIST check async_load_queue has this account in wait
-                async_load_account_wait_holder wait_holder = async_load_queue.dict_wait_holder[account.id];
-                if (wait_holder != null)
+                if (async_load_queue.dict_wait_holder.ContainsKey(account.id))
                 {
+                    async_load_account_wait_holder wait_holder = async_load_queue.dict_wait_holder[account.id];
                     wait_holder.list_wait_action.Add(this_package);
                 }
                 else
@@ -153,7 +175,7 @@ namespace gowinder.game_base_lib.data
                     event_load_request.set(this.service, async_load_ser, load_request);
                     event_load_request.send();
 
-                    wait_holder = new async_load_account_wait_holder(account.id);
+                    async_load_account_wait_holder wait_holder = new async_load_account_wait_holder(account.id);
                     wait_holder.list_wait_action.Add(this_package);
                     async_load_queue.dict_wait_holder.Add(account.id, wait_holder);
                 }

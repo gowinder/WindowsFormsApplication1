@@ -129,7 +129,7 @@ namespace WindowsFormsApplication1
 
         public void test_login()
         {
-            string str_json = @"{""user_name"":""test1"",""user_pwd"":""1234"",""action_type"":1,""ret"":0, ""fuck"":""asdf""}";
+            string str_json = @"{""type"":2,""sub_type"":1,""_i"":1,""token"":"""",""platform_id"":0,""user_name"":""test1"",""user_pwd"":""1234"",""ret"":0, ""fuck"":""asdf""}";
             JObject jo = (JObject)JsonConvert.DeserializeObject(str_json);
             string zone = jo["fuck"].ToString();
 

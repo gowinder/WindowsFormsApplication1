@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using gowinder.base_lib;
-using Newtonsoft.Json.Linq;
-using WindowsFormsApplication1.service;
+using gowinder.game_base_lib;
 using gowinder.game_base_lib.data;
+using Newtonsoft.Json.Linq;
 
 namespace WindowsFormsApplication1.net
 {
     public enum net_package_action_sub_type
     {
-        login,
+        login = 1,
         create_role,
         battle,
     }
@@ -21,17 +21,14 @@ namespace WindowsFormsApplication1.net
 
     public class net_package_action : net_package
     {
-        public net_package_action(service_base from_service, service_base process_service) : base(from_service)
+        public net_package_action(service_base from_service, service_base process_service = null) : base(from_service)
         {
             this.process_service = process_service;
         }
 
-        public service_base process_service { get; set; }
-
-
         public override void process()
         {
-            my_logic_service logic_ser = process_service as my_logic_service;
+            logic_service logic_ser = process_service as logic_service;
             if (logic_ser == null)
                 throw new Exception("net_package_action.process process_service is not my_logic_serivce");
             JObject json_root = data as JObject;

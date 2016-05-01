@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WindowsFormsApplication1.data;
+using WindowsFormsApplication1.net;
 using gowinder.game_base_lib.data;
 using gowinder.http_service_lib.evnt;
 using gowinder.net_base;
+using Newtonsoft.Json.Linq;
 
 namespace WindowsFormsApplication1.service
 {
@@ -27,9 +29,9 @@ namespace WindowsFormsApplication1.service
             if(!info.package.is_parsed)
                 throw new Exception("my_logic_service.receive_package package is not parsed");
 
-            switch (info.package.type)
+            switch ((net_package_type)info.package.type)
             {
-                case 1:
+                case net_package_type.action:
                 {
                     process_action_package(info.package);
                 }
@@ -37,20 +39,21 @@ namespace WindowsFormsApplication1.service
             }
         }
 
+
         private void process_action_package(net_package package)
         {
             account_check_login_result result = account_manager.check_login(package);
             if (result == account_check_login_result.need_remote_check)
             {
-                
+
             }
-            else if(result == account_check_login_result.login_ok)
+            else if (result == account_check_login_result.login_ok)
             {
-                
+
             }
             else
             {
-                
+
             }
         }
     }

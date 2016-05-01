@@ -12,7 +12,7 @@ namespace gowinder.game_base_lib
     {
         public class logic_service_event_builder : base_event_builder 
         {
-            public event_base build_event(string event_type)
+            public override event_base build_event(string event_type)
             {
                 event_base e = base.build_event(event_type);
                 if (e != null)
@@ -20,8 +20,8 @@ namespace gowinder.game_base_lib
 
                 switch (event_type)
                 {
-                    case event_http_receive_package.type:
-                        return new event_http_receive_package();
+                    case event_logic_receive_package.type:
+                        return new event_logic_receive_package();
                 }
 
                 return null;
@@ -50,6 +50,11 @@ namespace gowinder.game_base_lib
         {
             receive_package_info package_info = package.data as receive_package_info;
             
+        }
+
+        protected override void on_process_start()
+        {
+            account_manager.init();
         }
     }
 }

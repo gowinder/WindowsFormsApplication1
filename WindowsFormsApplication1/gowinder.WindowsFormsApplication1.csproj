@@ -73,7 +73,6 @@
     <Compile Include="data\data_login.cs" />
     <Compile Include="data\http_request_data.cs" />
     <Compile Include="data\my_account_manager.cs" />
-    <Compile Include="net\my_net_package_parser.cs" />
     <Compile Include="evnt\event_my_async_load_db_request.cs" />
     <Compile Include="evnt\event_my_async_load_db_response.cs" />
     <Compile Include="evnt\event_my_receive_package.cs" />
@@ -84,9 +83,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="http_requst_service.cs" />
-    <Compile Include="my_async_load_db_service.cs" />
+    <Compile Include="service\my_async_load_db_service.cs" />
     <Compile Include="my_db_event_builder.cs" />
-    <Compile Include="net\net_package_action.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="service\my_logic_service.cs" />

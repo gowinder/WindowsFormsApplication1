@@ -18,19 +18,19 @@ namespace gowinder.base_lib.evnt
         public service_base service {get;protected set;}
 
 
-        protected int _id;
-        public int id
+        protected string _name;
+        public string id
         {
             get
             {
-                return _id;
+                return _name;
             }
         }
 
 
-        public event_pump(int id, service_base ser)
+        public event_pump(string name, service_base ser)
         {
-            _id = id;
+            _name = name;
             _waiter = new ManualResetEvent(false);
             _locker = new Object();
             _queue = new Queue<event_base>();
@@ -59,6 +59,7 @@ namespace gowinder.base_lib.evnt
             {
                 if (!_is_open)
                     throw new Exception("event pump not open");
+
 
                 if (_queue.Count < 1)
                     return null;
@@ -129,11 +130,17 @@ namespace gowinder.base_lib.evnt
                 if (_map_recycle.ContainsKey(event_type))
                 {
                     Queue<event_base> queue_recyle = _map_recycle[event_type];
-                    if (queue_recyle.Count < 1)
+                    if (queue_recyle.Count > 0)
                         return queue_recyle.Dequeue();
                 }
                 else
-                    return service.event_builder.build_event(event_type);
+                {
+                    event_base e = service.event_builder.build_event(event_type);
+                    if (e != null)
+                        e.owner_pump = this;
+
+                    return e;
+                }
             }
 
             return null;

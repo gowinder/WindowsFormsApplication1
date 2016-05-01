@@ -30,15 +30,15 @@ namespace gowinder.game_base_lib.data
 
         public static string get_full_name(uint platform_id, string platform_user_id)
         {
-            return string.Format("_@_{0}_@_{1}", platform_id, platform_user_id);
+            return string.Format("_@{0}_@_{1}", platform_id, platform_user_id);
         }
 
         public void read_from_dataset(MySqlDataReader reader)
         {
             id = (uint)reader[0];
-            platform_id = (uint) reader[1];
-            platform_user_id = (string) reader[2];
-            full_name = (string) reader[3];
+            platform_id = (uint)(int) reader[12];
+            platform_user_id = (string) reader[14];
+            full_name = (string) reader[1];
         }
 
 

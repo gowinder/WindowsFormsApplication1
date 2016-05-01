@@ -36,6 +36,7 @@ namespace gowinder.net_base
         public object data { get; set; }
         public net_package_carrier carrier { get; set; }
         public service_base from_service { get; set; }
+        public service_base process_service { get; set; }
 
         public virtual int ret
         {

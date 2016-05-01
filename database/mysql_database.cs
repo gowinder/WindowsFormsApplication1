@@ -13,7 +13,7 @@ namespace gowinder.database
 
         public void open(string host, string db_name, string user_name, string user_pwd, int port)
         {
-            string str_conn = string.Format("server={0};User Id={1};password={2};Database={3}", host, db_name, user_pwd, db_name);
+            string str_conn = string.Format("server={0};User Id={1};password={2};Database={3}", host, user_name, user_pwd, db_name);
             _connection = new MySqlConnection(str_conn);
             _connection.Open();
         }

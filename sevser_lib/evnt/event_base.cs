@@ -59,11 +59,16 @@ namespace gowinder.base_lib.evnt
 
         public virtual void send()
         {
-            //             if (from_service == null)
-            //                 throw new exception_base(exception_base.RETURN_NULL_REF);
-            // 
-            //             if (to_service == null)
-            //                 throw new exception_base(exception_base.RETURN_NULL_REF);            
+//             if (from_service == null)
+//                 throw new Excep(exception_base.RETURN_NULL_REF);
+            
+            if (to_service == null)
+                throw new Exception("event_base.send() to_service is null");           
+
+            if(owner_pump == null)
+                throw new Exception("event_base.send() owner_pump is null");
+
+            owner_pump.push(this);
         }
 
         public void recycle()

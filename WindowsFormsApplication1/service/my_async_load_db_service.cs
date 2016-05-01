@@ -23,9 +23,10 @@ namespace WindowsFormsApplication1
             }
         }
 
-        public my_async_load_db_service(string service_name = ""):base(service_name)
+        public my_async_load_db_service():base(async_load_db_service.default_name)
         {
             this.event_builder = new my_async_event_builder();
+            start_own_thread = true;
         }
     }
 }

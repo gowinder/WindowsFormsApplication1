@@ -22,19 +22,22 @@ namespace WindowsFormsApplication1.data
 
         public net_package parse(string buff)
         {
-            net_package package = new net_package(from_serivce);
+            var json_root = JObject.Parse(buff);
+            net_package_type package_type = (net_package_type)(int)json_root[net_json_name.package_type];
+            net_package package = null;
+            if(package_type == net_package_type.action)
+                package = new net_package_action(from_serivce, null);
             try
             {
-                var json_root = JObject.Parse(buff);
                 package.data = json_root;
-                package.type = (uint)json_root[net_json_name.package_type];
+                package.type = 
                 package.sub_type = (uint)json_root[net_json_name.package_sub_type];
                 package.index = (uint)json_root[net_json_name.index];
                 package.token = (string)json_root[net_json_name.token];
             }
             catch(Exception ex)
             {
-                return null;
+                throw new Exception("net_package.parse invalid parameters");
             }
             package.is_parsed = true;
 
