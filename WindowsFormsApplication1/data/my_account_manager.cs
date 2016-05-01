@@ -42,6 +42,8 @@ namespace WindowsFormsApplication1.data
             }
 
             account.full_loaded = true;
+
+            async_load_queue.resume_process_wait_holder(account.id);
         }
 
         public override void init()

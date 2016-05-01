@@ -4,14 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WindowsFormsApplication1.evnt;
+using gowinder.base_lib.evnt;
+using gowinder.database.evnt;
 
 namespace WindowsFormsApplication1
 {
     public class my_async_load_db_service : async_load_db_service
     {
-        public my_async_load_db_service(string service_name):base(service_name)
+        class my_async_event_builder : i_event_builder
         {
-            
+            public event_base build_event(string event_type)
+            {
+                if(event_type == event_async_load_db_request.type)
+                    return new event_my_async_load_db_request();
+
+                return null;
+            }
+        }
+
+        public my_async_load_db_service(string service_name = ""):base(service_name)
+        {
+            this.event_builder = new my_async_event_builder();
         }
     }
 }

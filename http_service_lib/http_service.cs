@@ -14,11 +14,13 @@ namespace gowinder.http_service_lib
     {
         Dictionary<uint, net_context> dict_context;
 
+        public static string default_name = "http_service";
+
         protected object _lock_dict_context;
 
         public http_service()
         {
-            name = "http_service";
+            name = default_name;
             dict_context = new Dictionary<uint, net_context>();
             _lock_dict_context = new object();
         }

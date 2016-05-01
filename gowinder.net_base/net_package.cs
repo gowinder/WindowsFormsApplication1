@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WindowsFormsApplication1.net;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace gowinder.net_base
 {
@@ -18,7 +21,7 @@ namespace gowinder.net_base
         socket = 2,
     }
 
-    public class net_package : ICloneable
+    public class net_package : ICloneable, i_async_wait_action
     {
         public net_package(service_base from_service)
         {
@@ -33,6 +36,27 @@ namespace gowinder.net_base
         public object data { get; set; }
         public net_package_carrier carrier { get; set; }
         public service_base from_service { get; set; }
+
+        public virtual int ret
+        {
+            get
+            {
+                if (data is string)
+                {
+                    JObject jo = (JObject)JsonConvert.DeserializeObject(data as string);
+                    return (int)jo[net_json_name.ret];
+                }
+                return -1;
+            }
+            set
+            {
+                if (data is string)
+                {
+                    JObject jo = (JObject)JsonConvert.DeserializeObject(data as string);
+                    jo[net_json_name.ret] = value;
+                }
+            }
+        }
 
         /// <summary>
         /// 消息是否解析过
@@ -56,5 +80,9 @@ namespace gowinder.net_base
 
 
         public virtual void process() { }
+        public void resume_process()
+        {
+            process();
+        }
     }
 }

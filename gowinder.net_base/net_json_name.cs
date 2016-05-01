@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1.net
 {
-    class net_json_name
+    public class net_json_name
     {
         public const string package_type = "type";
         public const string package_sub_type = "sub_type";

@@ -16,7 +16,7 @@ namespace gowinder.database
             _dict_db = new Dictionary<uint, i_db>();
         }
 
-        public void init()
+        public virtual void init()
         {
             mysql_database db = new mysql_database();
             db.open("localhost", "pd", "root", "asdf", 3306);

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -103,11 +104,19 @@ namespace WindowsFormsApplication1
             Console.WriteLine("begin request: {0}, task:{1}, thread{2}, ispool:{3}", req, Task.CurrentId, Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsThreadPoolThread);
             try
             {
-                MemoryStream ms = new MemoryStream();
-                Serializer.Serialize(ms, reqesut_data);
-                StreamContent ht = new StreamContent(ms);
-                
-                var response = await client.PostAsync(req, ht);
+//                 MemoryStream ms = new MemoryStream();
+//                 Serializer.Serialize(ms, reqesut_data);
+//                 StreamContent ht = new StreamContent(ms);
+//                 StreamReader sr = new StreamReader(ms);
+//                 // Note if the JSON is simple enough you could ignore the 5 lines above that do the serialization and construct it yourself
+//                 // then pass it as the first argument to the StringContent constructor
+//                 StringContent theContent = new StringContent(sr.ReadToEnd(), System.Text.Encoding.UTF8, "application/json");
+
+                StringContent stringContent = new StringContent(reqesut_data);//这里请求不需要参数  所以为“”
+                stringContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+
+                var response = await client.PostAsync(req, stringContent);
                 string str_respons = await response.Content.ReadAsStringAsync();
 
                 Console.WriteLine("recive respons({0}), return:{1}", req, str_respons);

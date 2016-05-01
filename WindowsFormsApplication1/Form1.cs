@@ -43,7 +43,7 @@ namespace WindowsFormsApplication1
             log.Info("info");
 
             http_requst_service h = new http_requst_service();
-            h.test();
+  //          h.test();
 
             h.test_login();
         }
@@ -113,9 +113,13 @@ namespace WindowsFormsApplication1
             };
 
             http_listerner_ser.net_package_parser = new my_net_package_parser(http_listerner_ser);
+
+            my_async_load_db_service async_load_db_ser = new my_async_load_db_service();
+
             service_manager.instance().add_service(http_ser);
             service_manager.instance().add_service(http_listerner_ser);
             service_manager.instance().add_service(logic_ser);
+            service_manager.instance().add_service(async_load_db_ser);
 
             service_manager.instance().start_all();
             

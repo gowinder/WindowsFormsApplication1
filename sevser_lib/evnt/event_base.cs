@@ -16,7 +16,7 @@ namespace gowinder.base_lib.evnt
         byte_array,
         char_array,
         string_obj,
-        json_data,
+        json,
         netmsg,
         object_class,
     }

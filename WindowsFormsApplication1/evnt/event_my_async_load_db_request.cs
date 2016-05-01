@@ -12,7 +12,7 @@ using WindowsFormsApplication1.data;
 namespace WindowsFormsApplication1.evnt
 {
     [Serializable]
-    class event_my_async_load_db_request : event_async_load_db_request
+    public class event_my_async_load_db_request : event_async_load_db_request
     {
         protected override Dictionary<string, object> load_need_data(i_db db, uint account_id)
         {

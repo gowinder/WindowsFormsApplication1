@@ -86,7 +86,6 @@
     <Compile Include="http_requst_service.cs" />
     <Compile Include="my_async_load_db_service.cs" />
     <Compile Include="my_db_event_builder.cs" />
-    <Compile Include="net\net_json_name.cs" />
     <Compile Include="net\net_package_action.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

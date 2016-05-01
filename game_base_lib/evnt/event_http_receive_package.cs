@@ -7,6 +7,8 @@ namespace gowinder.game_base_lib.evnt
     [Serializable]
     public class event_http_receive_package : event_receive_package
     {
+        public const string type = "event_http_receive_package";
+
         public override void process()
         {
             logic_service ser = to_service as logic_service;

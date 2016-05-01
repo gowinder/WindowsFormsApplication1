@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using gowinder.base_lib;
 using Newtonsoft.Json.Linq;
 using WindowsFormsApplication1.service;
+using gowinder.game_base_lib.data;
 
 namespace WindowsFormsApplication1.net
 {
@@ -42,7 +43,16 @@ namespace WindowsFormsApplication1.net
                         string user_name = (string)json_root[net_json_name.user_name];
                         string user_pwd = (string)json_root[net_json_name.user_pwd];
                         uint platform_id = (uint)json_root[net_json_name.platform_id];
-                        logic_ser.account_manager.do_login();
+                        login_result login_ret = logic_ser.account_manager.do_login(this, platform_id, user_name, user_pwd);
+
+                        if (login_ret == login_result.login_ok_need_load)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                                    
+                        }
                     }
                     break;
                 case net_package_action_sub_type.create_role:
