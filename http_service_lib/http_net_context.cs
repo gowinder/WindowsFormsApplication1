@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using gowinder.net_base;
 
 namespace gowinder.http_service_lib
 {

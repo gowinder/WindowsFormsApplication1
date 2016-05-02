@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WindowsFormsApplication1.service;
 using gowinder.http_service_lib.evnt;
+using gowinder.net_base.evnt;
 
 namespace WindowsFormsApplication1.evnt
 {

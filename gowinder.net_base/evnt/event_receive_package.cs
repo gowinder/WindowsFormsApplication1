@@ -8,7 +8,7 @@ using gowinder.base_lib;
 using gowinder.base_lib.evnt;
 using gowinder.net_base;
 
-namespace gowinder.http_service_lib.evnt
+namespace gowinder.net_base.evnt
 {
     [Serializable]
     public class receive_package_info

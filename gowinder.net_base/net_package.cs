@@ -1,24 +1,19 @@
-﻿using gowinder.base_lib;
-using gowinder.http_service_lib.evnt;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WindowsFormsApplication1.net;
+﻿using System;
+using gowinder.base_lib;
+using gowinder.net_base.evnt;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace gowinder.net_base
 {
     /// <summary>
-    /// net packet form
+    ///     net packet form
     /// </summary>
     public enum net_package_carrier
     {
         none = 0,
         http = 1,
-        socket = 2,
+        socket = 2
     }
 
     public class net_package : ICloneable, i_async_wait_action
@@ -37,6 +32,7 @@ namespace gowinder.net_base
         public net_package_carrier carrier { get; set; }
         public service_base from_service { get; set; }
         public service_base process_service { get; set; }
+        public object owner { get; set; }
 
         public virtual int ret
         {
@@ -44,33 +40,43 @@ namespace gowinder.net_base
             {
                 if (data is string)
                 {
-                    JObject jo = (JObject)JsonConvert.DeserializeObject(data as string);
+                    var jo = (JObject) JsonConvert.DeserializeObject(data as string);
+                    return (int) jo[net_json_name.ret];
+                }
+                else if (data is JObject)
+                {
+                    JObject jo = (JObject) data;
                     return (int)jo[net_json_name.ret];
                 }
-                return -1;
+                throw new NotImplementedException("net_package ret get not implemented for none json type");
             }
             set
             {
                 if (data is string)
                 {
-                    JObject jo = (JObject)JsonConvert.DeserializeObject(data as string);
+                    var jo = (JObject) JsonConvert.DeserializeObject(data as string);
                     jo[net_json_name.ret] = value;
+                }
+                else if (data is JObject)
+                {
+                    JObject jo = (JObject)data;//
+                    jo[net_json_name.ret] = value;
+                }
+                else
+                {
+                    throw new NotImplementedException("net_package ret set not implemented for none json type");
                 }
             }
         }
 
         /// <summary>
-        /// 消息是否解析过
+        ///     消息是否解析过
         /// </summary>
         public bool is_parsed { get; set; }
 
-        /// <summary>
-        /// use to send back package to where it come from the from_service
-        /// </summary>
-        public void send_back(service_base send_back_from_service)
+        public void resume_process()
         {
-            var temp_e = from_service.get_new_event(event_send_package.type) as event_send_package;
-            temp_e.set(send_back_from_service, from_service, this);
+            process();
         }
 
         public object Clone()
@@ -79,11 +85,28 @@ namespace gowinder.net_base
             return c;
         }
 
-
-        public virtual void process() { }
-        public void resume_process()
+        /// <summary>
+        ///     use to send back package to where it come from the from_service
+        /// </summary>
+        public void send_back(service_base send_back_from_service)
         {
-            process();
+            var temp_e = from_service.get_new_event(event_send_package.type) as event_send_package;
+            if (temp_e == null)
+                throw new Exception("package_action.send_back get new event_send_package failed");
+            receive_package_info recv_info = this.owner as receive_package_info;
+            if (recv_info == null)
+                throw new Exception("package_action.send_back owner as receive_package_info is null");
+            send_package_info send_info = new send_package_info() { context = recv_info.context, package = this };
+            this.owner = send_info;
+
+            temp_e.set(send_back_from_service, from_service, send_info);
+            temp_e.send();
+            
+        }
+
+
+        public virtual void process()
+        {
         }
     }
 }

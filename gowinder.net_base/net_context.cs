@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gowinder.http_service_lib
+namespace gowinder.net_base
 {
     public class net_context
     {

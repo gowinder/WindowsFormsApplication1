@@ -46,6 +46,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Unity.Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Newtonsoft.Json.7.0.0.0\lib\net35-Client\Unity.Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
@@ -53,7 +57,6 @@
     <Compile Include="http_listerner_service.cs" />
     <Compile Include="http_net_context.cs" />
     <Compile Include="http_service.cs" />
-    <Compile Include="http_service_event_builder.cs" />
     <Compile Include="i_http_dispatch_service.cs" />
     <Compile Include="i_net_context_manager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

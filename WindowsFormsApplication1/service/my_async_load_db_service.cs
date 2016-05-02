@@ -25,8 +25,12 @@ namespace WindowsFormsApplication1
 
         public my_async_load_db_service():base(async_load_db_service.default_name)
         {
-            this.event_builder = new my_async_event_builder();
             start_own_thread = true;
+        }
+
+        protected override i_event_builder on_create_event_builder()
+        {
+            return new my_async_event_builder() as i_event_builder; ;
         }
     }
 }

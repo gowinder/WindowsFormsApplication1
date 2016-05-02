@@ -20,8 +20,10 @@ namespace WindowsFormsApplication1.data
         protected override void on_rev_async_load_data(data_default_account default_account, event_async_load_db_response response)
         {
             data_account account = default_account as data_account;
-            
-            Dictionary<string, object> load_data = response.data as Dictionary<string, object>;
+            async_load_db_response res = response.data as async_load_db_response;
+            if(res == null)
+                throw new Exception("my_account_manager.on_rev_async_load_data response.data is not async_load_db_response");
+            Dictionary<string, object> load_data = res.dict_result;
             foreach (var key in load_data.Keys)
             {
                 switch (key)

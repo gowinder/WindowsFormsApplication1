@@ -5,16 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using gowinder.base_lib.evnt;
 using gowinder.base_lib;
-using gowinder.net_base;
 
-namespace gowinder.http_service_lib.evnt
+namespace gowinder.net_base.evnt
 {
     [Serializable]
     public class send_package_info
     {
         
         public net_context context { get; set; }
-        private byte[] buffer { get; set; }
+        public net_package package { get; set; }
     }
 
     [Serializable]
@@ -27,11 +26,11 @@ namespace gowinder.http_service_lib.evnt
             
         }
 
-        public void set(service_base from_ser, service_base to_ser, net_package package)
+        public void set(service_base from_ser, service_base to_ser, send_package_info package_info)
         {
             from_service = from_ser;
             to_service = to_ser;
-            this.data = package;
+            this.data = package_info;
         }
     }
 }

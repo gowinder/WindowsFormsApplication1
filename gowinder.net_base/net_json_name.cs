@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsFormsApplication1.net
+namespace gowinder.net_base
 {
     public class net_json_name
     {

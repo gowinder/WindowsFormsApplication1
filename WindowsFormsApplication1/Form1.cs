@@ -109,7 +109,8 @@ namespace WindowsFormsApplication1
             {
                 start_own_thread = true,
                 context_manager = http_ser,
-                receive_package_service = logic_ser
+                receive_package_service = logic_ser,
+                http_ser = http_ser
             };
 
             http_listerner_ser.net_package_parser = new my_net_package_parser(http_listerner_ser);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using gowinder.http_service_lib.evnt;
+using gowinder.net_base.evnt;
 
 namespace gowinder.game_base_lib.evnt
 {

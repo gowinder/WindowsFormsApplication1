@@ -14,6 +14,7 @@ using System.IO;
 using gowinder.base_lib.service;
 using gowinder.http_service_lib;
 using gowinder.http_service_lib.evnt;
+using gowinder.net_base.evnt;
 using ProtoBuf;
 
 namespace gowinder.http_service
@@ -33,7 +34,7 @@ namespace gowinder.http_service
             _listener.Prefixes.Add("http://127.0.0.1:9981/test_request/");
             
         }
-
+        public service_base http_ser { get; set; }
         private uint _current_id = 0;
         protected uint current_id { get { return ++_current_id; }  }
 
@@ -109,10 +110,12 @@ namespace gowinder.http_service
             if (input_text != "")
             {
                 net_package p = net_package_parser.parse(input_text);
-
+                p.from_service = http_ser;
+                p.carrier = net_package_carrier.http;
                 event_receive_package e = receive_package_service.get_new_event(event_receive_package.type) as event_receive_package;
                 receive_package_info info = new receive_package_info() {context = my_context,package = p};
-                e.set(this, receive_package_service, info);
+                p.owner = info;
+                e.set(http_ser, receive_package_service, info);
                 e.send();
 
                 context_manager.add_context(my_context);

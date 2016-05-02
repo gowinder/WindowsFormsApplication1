@@ -7,11 +7,38 @@ using System.Threading;
 using System.Threading.Tasks;
 using gowinder.base_lib.evnt;
 using gowinder.http_service_lib.evnt;
+using gowinder.net_base;
+using gowinder.net_base.evnt;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace gowinder.http_service_lib
 {
     public class http_service : service_base, i_net_context_manager
     {
+        protected class http_service_event_builder : base_event_builder
+        {
+
+            public override event_base build_event(String event_type)
+            {
+                event_base e = base.build_event(event_type);
+                if (e != null)
+                    return e;
+
+                switch (event_type)
+                {
+                    case event_send_package.type:
+                        {
+                            return new event_http_send_package();
+                        }
+                        break;
+
+                }
+
+                return null;
+            }
+        }
+
         Dictionary<uint, net_context> dict_context;
 
         public static string default_name = "http_service";
@@ -23,6 +50,7 @@ namespace gowinder.http_service_lib
             name = default_name;
             dict_context = new Dictionary<uint, net_context>();
             _lock_dict_context = new object();
+            start_own_thread = true;
         }
 
         protected override void on_maintain()
@@ -37,16 +65,24 @@ namespace gowinder.http_service_lib
 
         public void send_response(send_package_info info)
         {
+            if(info == null)
+                throw new Exception("http_service.send_response send_package_info is null");
+            if(info.context == null)
+                throw new Exception("http_service.send_response send_package_info.context is null");
             http_net_context mctx = info.context as http_net_context;
             if(mctx == null)
                 throw new Exception("http_service.send_response info.context is not http_net_context");
             Task.Run(async () =>
             {
-
-                StringBuilder sb = new StringBuilder();
-                sb.Append(mctx.id);
-                sb.Append(" end");
-                string str = sb.ToString();
+                string str = "";
+                if (info.package.data is JObject)
+                    str = JsonConvert.SerializeObject(info.package.data);
+                else if(info.package.data is string)
+                    str = (string)info.package.data;
+                else
+                {
+                    throw new NotImplementedException("http_service.send_response info.package.data not support type");
+                }
                 byte[] bb = System.Text.Encoding.UTF8.GetBytes(str);
                 await mctx.ctx.Response.OutputStream.WriteAsync(bb, 0, bb.Length);
                 mctx.ctx.Response.Close();
@@ -70,7 +106,9 @@ namespace gowinder.http_service_lib
         {
             lock (_lock_dict_context)
             {
-                return dict_context[id];
+                if(dict_context.ContainsKey(id))
+                    return dict_context[id] as net_context;
+                return null;
             }
         }
 
