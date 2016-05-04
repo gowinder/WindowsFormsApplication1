@@ -1,9 +1,15 @@
-﻿using gowinder.base_lib.evnt;
+﻿// gowinder@hotmail.com
+// gowinder.database
+// event_async_load_db_response.cs
+// 2016-05-04-9:34
+
+#region
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using gowinder.base_lib.evnt;
+
+#endregion
 
 namespace gowinder.database.evnt
 {
@@ -20,7 +26,6 @@ namespace gowinder.database.evnt
 
         public event_async_load_db_response() : base(type)
         {
-            
         }
     }
 }

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.database
+// i_db_manager.cs
+// 2016-05-04-9:34
 
 namespace gowinder.database
 {
-    interface i_db_manager
+    internal interface i_db_manager
     {
         i_db get_database(uint id);
     }

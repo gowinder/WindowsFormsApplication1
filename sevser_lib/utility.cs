@@ -1,8 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.base_lib
+// utility.cs
+// 2016-05-04-9:34
+
+#region
+
+using System;
+
+#endregion
 
 namespace gowinder.server_lib
 {
@@ -10,7 +15,7 @@ namespace gowinder.server_lib
     {
         public static long get_tick()
         {
-            return (DateTime.Now.Ticks) / 10000000 - 8 * 60 * 60;            
+            return DateTime.Now.Ticks/10000000 - 8*60*60;
         }
     }
 }

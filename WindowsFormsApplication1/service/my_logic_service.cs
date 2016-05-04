@@ -1,26 +1,33 @@
-﻿using gowinder.base_lib;
-using gowinder.game_base_lib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.WindowsFormsApplication1
+// my_logic_service.cs
+// 2016-05-04-9:34
+
+#region
+
 using WindowsFormsApplication1.data;
 using WindowsFormsApplication1.evnt;
-using WindowsFormsApplication1.net;
 using gowinder.base_lib.evnt;
 using gowinder.database.evnt;
-using gowinder.game_base_lib.data;
-using gowinder.game_base_lib.evnt;
-using gowinder.http_service_lib.evnt;
-using gowinder.net_base;
-using gowinder.net_base.evnt;
-using Newtonsoft.Json.Linq;
+using gowinder.game_base_lib;
+
+#endregion
 
 namespace WindowsFormsApplication1.service
 {
     public class my_logic_service : logic_service
     {
+        protected override void build_user_manager()
+        {
+            account_manager = new my_account_manager(this);
+        }
+
+        protected override i_event_builder on_create_event_builder()
+        {
+            return new my_logic_service_event_builder();
+            ;
+        }
+
         protected class my_logic_service_event_builder : logic_service_event_builder
         {
             public override event_base build_event(string event_type)
@@ -32,7 +39,7 @@ namespace WindowsFormsApplication1.service
                 }
 
 
-                event_base e = base.build_event(event_type);
+                var e = base.build_event(event_type);
                 if (e != null)
                     return e;
 
@@ -40,16 +47,9 @@ namespace WindowsFormsApplication1.service
             }
         }
 
-        protected override void build_user_manager()
-        {
-            account_manager = new my_account_manager(this);
-        }
-        protected override i_event_builder on_create_event_builder()
-        {
-            return new my_logic_service_event_builder() as i_event_builder; ;
-        }
 // 
 //         public override void receive_package(event_receive_package package)
+
 //         {
 //             receive_package_info info = package.data as receive_package_info;
 //             if(info == null)

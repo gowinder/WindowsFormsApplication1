@@ -1,8 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.base_lib
+// i_event_pump.cs
+// 2016-05-04-9:34
+
+#region
+
+
+
+#endregion
 
 namespace gowinder.base_lib.evnt
 {
@@ -16,6 +21,6 @@ namespace gowinder.base_lib.evnt
         void open();
         bool is_open();
         void recycle(event_base e);
-        event_base get_new_event(String type);
+        event_base get_new_event(string type);
     }
 }

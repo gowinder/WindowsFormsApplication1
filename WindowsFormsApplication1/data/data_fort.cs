@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.WindowsFormsApplication1
+// data_fort.cs
+// 2016-05-04-9:34
 
 namespace WindowsFormsApplication1.data
 {

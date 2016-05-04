@@ -1,9 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.base_lib
+// i_service_manager.cs
+// 2016-05-04-9:34
+
+#region
+
 using gowinder.base_lib.evnt;
+
+#endregion
 
 namespace gowinder.base_lib.service
 {

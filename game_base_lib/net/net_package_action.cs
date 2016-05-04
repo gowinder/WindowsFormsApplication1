@@ -1,11 +1,18 @@
-﻿using System;
+﻿// gowinder@hotmail.com
+// gowinder.game_base_lib
+// net_package_action.cs
+// 2016-05-04-9:34
+
+#region
+
+using System;
 using gowinder.base_lib;
 using gowinder.game_base_lib;
 using gowinder.game_base_lib.data;
-using gowinder.http_service_lib.evnt;
 using gowinder.net_base;
-using gowinder.net_base.evnt;
 using Newtonsoft.Json.Linq;
+
+#endregion
 
 namespace WindowsFormsApplication1.net
 {

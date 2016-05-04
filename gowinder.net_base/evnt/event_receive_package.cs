@@ -1,37 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.net_base
+// event_receive_package.cs
+// 2016-05-04-9:34
+
+#region
+
+using System;
 using gowinder.base_lib;
 using gowinder.base_lib.evnt;
-using gowinder.net_base;
+
+#endregion
 
 namespace gowinder.net_base.evnt
 {
-    [Serializable]
     public class receive_package_info
     {
         public net_context context { get; set; }
         public net_package package { get; set; }
     }
-
-    [Serializable]
+    
     public class event_receive_package : event_base
     {
         public const string type = "event_receive_package";
+
+        public event_receive_package() : base(type)
+        {
+        }
 
         public void set(service_base from, service_base to, receive_package_info info)
         {
             from_service = from;
             to_service = to;
-            this.data = info;
-        }
-
-        public event_receive_package() : base(type)
-        {
-            
+            data = info;
         }
     }
 }

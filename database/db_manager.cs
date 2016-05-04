@@ -1,30 +1,35 @@
-﻿using System;
+﻿// gowinder@hotmail.com
+// gowinder.database
+// db_manager.cs
+// 2016-05-04-9:34
+
+#region
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace gowinder.database
 {
-    class db_manager : i_db_manager
+    internal class db_manager : i_db_manager
     {
-        Dictionary<uint, i_db> _dict_db;
+        private readonly Dictionary<uint, i_db> _dict_db;
 
         public db_manager()
         {
             _dict_db = new Dictionary<uint, i_db>();
         }
 
-        public void init()
-        {
-            mysql_database db = new mysql_database();
-            db.open("localhost", "pd", "root", "asdf", 3306);
-            _dict_db.Add(1, db);
-        }
-
         public i_db get_database(uint id)
         {
             return _dict_db[id];
+        }
+
+        public void init()
+        {
+            var db = new mysql_database();
+            db.open("localhost", "pd", "root", "asdf", 3306);
+            _dict_db.Add(1, db);
         }
     }
 }

@@ -55,7 +55,7 @@
     <Compile Include="evnt\event_logic_receive_package.cs" />
     <Compile Include="logic_service.cs" />
     <Compile Include="data\account_manager.cs" />
-    <Compile Include="net\my_net_package_parser.cs" />
+    <Compile Include="net\http_string_net_package_parser.cs" />
     <Compile Include="net\net_package_action.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="data\account_check_login_result.cs" />

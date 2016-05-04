@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gowinder.WindowsFormsApplication1", "WindowsFormsApplication1\gowinder.WindowsFormsApplication1.csproj", "{BBDB646E-DDD1-4151-8E0F-F32350A8ED73}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gowinder.game_base_lib", "game_base_lib\gowinder.game_base_lib.csproj", "{C79CCFA4-872D-4343-BCDF-1C7735CE6AE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gowinder.net_base", "gowinder.net_base\gowinder.net_base.csproj", "{A1A06DEE-31AF-41F3-AC82-33E5E345D6BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gowinder.socket_service_lib", "gowinder.socket_service_lib\gowinder.socket_service_lib.csproj", "{6A69E6F2-F591-4E26-9F24-8797DE8E9241}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A1A06DEE-31AF-41F3-AC82-33E5E345D6BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1A06DEE-31AF-41F3-AC82-33E5E345D6BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1A06DEE-31AF-41F3-AC82-33E5E345D6BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A69E6F2-F591-4E26-9F24-8797DE8E9241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A69E6F2-F591-4E26-9F24-8797DE8E9241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A69E6F2-F591-4E26-9F24-8797DE8E9241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A69E6F2-F591-4E26-9F24-8797DE8E9241}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

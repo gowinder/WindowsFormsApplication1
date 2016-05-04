@@ -1,18 +1,21 @@
-﻿using System;
+﻿// gowinder@hotmail.com
+// gowinder.WindowsFormsApplication1
+// data_account.cs
+// 2016-05-04-9:34
+
+#region
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using gowinder.game_base_lib.data;
+
+#endregion
 
 namespace WindowsFormsApplication1.data
 {
-    class data_account : data_default_account
+    internal class data_account : data_default_account
     {
-        public data_account() : base()
-        {
-            
-        }
+        public List<data_item> list_item { get; set; }
+        public List<data_fort> list_fort { get; set; }
 
         public override void clear_full_load()
         {
@@ -20,10 +23,5 @@ namespace WindowsFormsApplication1.data
             list_item = null;
             list_fort = null;
         }
-
-        public List<data_item> list_item { get; set; }
-        public List<data_fort> list_fort { get; set; }
-
-
     }
 }

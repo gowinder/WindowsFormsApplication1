@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.http_service_lib
+// i_http_dispatch_service.cs
+// 2016-05-04-9:34
 
 namespace gowinder.http_service_lib
 {

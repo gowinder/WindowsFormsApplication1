@@ -1,17 +1,12 @@
-﻿using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NLog;
-using ProtoBuf;
+﻿// gowinder@hotmail.com
+// gowinder.WindowsFormsApplication1
+// Form1.cs
+// 2016-05-04-9:34
+
+#region
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using WindowsFormsApplication1.data;
@@ -20,45 +15,51 @@ using gowinder.base_lib.service;
 using gowinder.database;
 using gowinder.http_service;
 using gowinder.http_service_lib;
+using gowinder.socket_service_lib;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NLog;
+
+#endregion
 
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        private http_service service { get; set; }
-        private async_save_db_service async_save_db_service { get;set;}
-        
-
         public Form1()
         {
             InitializeComponent();
-             
         }
+
+        private http_service service { get; set; }
+        private async_save_db_service async_save_db_service { get; set; }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Logger log = LogManager.GetCurrentClassLogger();
+            var log = LogManager.GetCurrentClassLogger();
             log.Trace("fuck");
             log.Debug("debug fuck");
             log.Info("info");
 
-            http_requst_service h = new http_requst_service();
-  //          h.test();
+            var h = new http_requst_service();
+            //          h.test();
 
             h.test_login();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            data_login dl = new data_login() { user_name = "test1", user_pwd = "1234", action_type = 1 };
+            var dl = new data_login {user_name = "test1", user_pwd = "1234", action_type = 1};
 
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var serializer = new JavaScriptSerializer();
             var json = serializer.Serialize(dl);
             Console.WriteLine(json);
 
-            string str_json = @"{""user_name"":""test1"",""user_pwd"":""1234"",""type"":1,,""sub_type"":1,""_i"":1,""ret"":0, ""fuck"":""asdf""}";
-            JObject jo = (JObject)JsonConvert.DeserializeObject(str_json);
-            string zone = jo["fuck"].ToString();
+            var str_json =
+                @"{""user_name"":""test1"",""user_pwd"":""1234"",""type"":1,,""sub_type"":1,""_i"":1,""ret"":0, ""fuck"":""asdf""}";
+            var jo = (JObject) JsonConvert.DeserializeObject(str_json);
+            var zone = jo["fuck"].ToString();
 
 
             var p1 = serializer.Deserialize<data_login>(str_json);
@@ -89,9 +90,9 @@ namespace WindowsFormsApplication1
             var rdr = command.ExecuteReader();
             while (rdr.Read())
             {
-                for(int i = 0; i < rdr.FieldCount; i++)
+                for (var i = 0; i < rdr.FieldCount; i++)
                 {
-                    StringBuilder sb = new StringBuilder();
+                    var sb = new StringBuilder();
                     sb.Append(rdr.GetName(i));
                     sb.Append(":");
                     sb.Append(rdr[i]);
@@ -103,9 +104,9 @@ namespace WindowsFormsApplication1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            http_service http_ser = new http_service() {start_own_thread = true};
-            my_logic_service logic_ser = new my_logic_service() {start_own_thread = true};
-            http_listerner_service http_listerner_ser = new http_listerner_service()
+            var http_ser = new http_service {start_own_thread = true};
+            var logic_ser = new my_logic_service {start_own_thread = true};
+            var http_listerner_ser = new http_listerner_service
             {
                 start_own_thread = true,
                 context_manager = http_ser,
@@ -113,17 +114,24 @@ namespace WindowsFormsApplication1
                 http_ser = http_ser
             };
 
-            http_listerner_ser.net_package_parser = new my_net_package_parser(http_listerner_ser);
+            http_listerner_ser.net_package_parser = new http_string_net_package_parser(http_listerner_ser);
 
-            my_async_load_db_service async_load_db_ser = new my_async_load_db_service();
+            var async_load_db_ser = new my_async_load_db_service();
+
+            var socket_ser = new socket_service();
+            var socket_listerner_ser = new socket_listerner_service(socket_ser) {receive_package_service = logic_ser, send_package_service = socket_ser};
+            var socket_net_package_parser = new default_socket_net_package_parser(socket_ser, logic_ser);
+            socket_listerner_ser.net_package_parser = socket_net_package_parser;
+            
 
             service_manager.instance().add_service(http_ser);
             service_manager.instance().add_service(http_listerner_ser);
             service_manager.instance().add_service(logic_ser);
             service_manager.instance().add_service(async_load_db_ser);
+            service_manager.instance().add_service(socket_ser);
+            service_manager.instance().add_service(socket_listerner_ser);
 
             service_manager.instance().start_all();
-            
         }
     }
 }

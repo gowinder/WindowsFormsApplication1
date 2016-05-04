@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.game_base_lib
+// login_result.cs
+// 2016-05-04-9:34
 
 namespace gowinder.game_base_lib.data
 {
@@ -12,6 +11,6 @@ namespace gowinder.game_base_lib.data
         no_account = 1,
         invalid_authorized = 2,
         login_ok_need_load = 3,
-        need_remote_check = 4,
+        need_remote_check = 4
     }
 }

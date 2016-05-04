@@ -1,13 +1,17 @@
-﻿using NLog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.WindowsFormsApplication1
+// test_log.cs
+// 2016-05-04-9:34
+
+#region
+
+using NLog;
+
+#endregion
 
 namespace WindowsFormsApplication1
 {
-    class test_log
+    internal class test_log
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
     }

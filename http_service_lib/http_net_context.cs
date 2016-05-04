@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// gowinder@hotmail.com
+// gowinder.http_service_lib
+// http_net_context.cs
+// 2016-05-04-9:34
+
+#region
+
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using gowinder.net_base;
+
+#endregion
 
 namespace gowinder.http_service_lib
 {
     public class http_net_context : net_context
     {
-        public HttpListenerContext ctx { get; set; }
-
-        public http_net_context(uint i, long ed) : base(i, ed)
+        public http_net_context(uint i) : base(i)
         {
         }
+
+        public HttpListenerContext ctx { get; set; }
     }
 }

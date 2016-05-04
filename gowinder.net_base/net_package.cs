@@ -1,8 +1,17 @@
-﻿using System;
+﻿// gowinder@hotmail.com
+// gowinder.net_base
+// net_package.cs
+// 2016-05-04-9:34
+
+#region
+
+using System;
 using gowinder.base_lib;
 using gowinder.net_base.evnt;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
+#endregion
 
 namespace gowinder.net_base
 {
@@ -43,10 +52,10 @@ namespace gowinder.net_base
                     var jo = (JObject) JsonConvert.DeserializeObject(data as string);
                     return (int) jo[net_json_name.ret];
                 }
-                else if (data is JObject)
+                if (data is JObject)
                 {
-                    JObject jo = (JObject) data;
-                    return (int)jo[net_json_name.ret];
+                    var jo = (JObject) data;
+                    return (int) jo[net_json_name.ret];
                 }
                 throw new NotImplementedException("net_package ret get not implemented for none json type");
             }
@@ -59,7 +68,7 @@ namespace gowinder.net_base
                 }
                 else if (data is JObject)
                 {
-                    JObject jo = (JObject)data;//
+                    var jo = (JObject) data; //
                     jo[net_json_name.ret] = value;
                 }
                 else
@@ -79,6 +88,11 @@ namespace gowinder.net_base
             process();
         }
 
+        public virtual void parse_data()
+        {
+            
+        }
+
         public object Clone()
         {
             var c = new net_package(from_service);
@@ -93,15 +107,14 @@ namespace gowinder.net_base
             var temp_e = from_service.get_new_event(event_send_package.type) as event_send_package;
             if (temp_e == null)
                 throw new Exception("package_action.send_back get new event_send_package failed");
-            receive_package_info recv_info = this.owner as receive_package_info;
+            var recv_info = owner as receive_package_info;
             if (recv_info == null)
                 throw new Exception("package_action.send_back owner as receive_package_info is null");
-            send_package_info send_info = new send_package_info() { context = recv_info.context, package = this };
-            this.owner = send_info;
+            var send_info = new send_package_info {context = recv_info.context, package = this};
+            owner = send_info;
 
             temp_e.set(send_back_from_service, from_service, send_info);
             temp_e.send();
-            
         }
 
 

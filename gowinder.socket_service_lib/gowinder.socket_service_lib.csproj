@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A1A06DEE-31AF-41F3-AC82-33E5E345D6BF}</ProjectGuid>
+    <ProjectGuid>{6A69E6F2-F591-4E26-9F24-8797DE8E9241}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gowinder.net_base</RootNamespace>
-    <AssemblyName>gowinder.net_base</AssemblyName>
+    <RootNamespace>gowinder.socket_service_lib</RootNamespace>
+    <AssemblyName>gowinder.socket_service_lib</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -38,30 +38,29 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Unity.Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.Newtonsoft.Json.7.0.0.0\lib\net35-Client\Unity.Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="i_net_context_manager.cs" />
-    <Compile Include="i_net_package_parser.cs" />
-    <Compile Include="net_json_name.cs" />
-    <Compile Include="net_package_type.cs" />
-    <Compile Include="evnt\event_receive_package.cs" />
-    <Compile Include="evnt\event_send_package.cs" />
-    <Compile Include="net_context.cs" />
-    <Compile Include="net_package.cs" />
+    <Compile Include="default_socket_net_package_parser.cs" />
+    <Compile Include="evnt\event_socket_send_package.cs" />
+    <Compile Include="socket_package.cs" />
+    <Compile Include="socket_listerner_service.cs" />
+    <Compile Include="socket_net_context.cs" />
+    <Compile Include="socket_service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\database\gowinder.database.csproj">
+      <Project>{b510b71a-a353-4f3a-8290-5f558fa8bc91}</Project>
+      <Name>gowinder.database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gowinder.net_base\gowinder.net_base.csproj">
+      <Project>{a1a06dee-31af-41f3-ac82-33e5e345d6bf}</Project>
+      <Name>gowinder.net_base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sevser_lib\gowinder.base_lib.csproj">
       <Project>{8802d93e-4aaf-497b-a9cb-068a0d26a66c}</Project>
       <Name>gowinder.base_lib</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

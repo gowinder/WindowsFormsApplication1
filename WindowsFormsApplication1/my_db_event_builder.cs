@@ -1,28 +1,32 @@
-﻿using gowinder.base_lib.evnt;
-using gowinder.database.evnt;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.WindowsFormsApplication1
+// my_db_event_builder.cs
+// 2016-05-04-9:34
+
+#region
+
 using WindowsFormsApplication1.evnt;
+using gowinder.base_lib.evnt;
+using gowinder.database.evnt;
+
+#endregion
 
 namespace WindowsFormsApplication1
 {
-    class my_db_event_builder : db_event_builder
+    internal class my_db_event_builder : db_event_builder
     {
-        public override event_base build_event(String event_type)
+        public override event_base build_event(string event_type)
         {
-            event_base e = base.build_event(event_type);
+            var e = base.build_event(event_type);
             if (e != null)
                 return e;
 
             switch (event_type)
             {
                 case event_async_load_db_request.type:
-                    {
-                        return new event_my_async_load_db_request();
-                    }
+                {
+                    return new event_my_async_load_db_request();
+                }
                 default:
                     return null;
             }

@@ -1,7 +1,7 @@
 ﻿// gowinder@hotmail.com
-// gowinder.base_lib
+// gowinder.socket_service_lib
 // AssemblyInfo.cs
-// 2016-05-04-9:34
+// 2016-05-04-9:35
 
 #region
 
@@ -14,11 +14,11 @@ using System.Runtime.InteropServices;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 
-[assembly: AssemblyTitle("sevser_lib")]
+[assembly: AssemblyTitle("gowinder.socket_service_lib")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("sevser_lib")]
+[assembly: AssemblyProduct("gowinder.socket_service_lib")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -31,7 +31,7 @@ using System.Runtime.InteropServices;
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
 
-[assembly: Guid("8802d93e-4aaf-497b-a9cb-068a0d26a66c")]
+[assembly: Guid("6a69e6f2-f591-4e26-9f24-8797de8e9241")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

@@ -1,42 +1,47 @@
-﻿using System;
+﻿// gowinder@hotmail.com
+// gowinder.base_lib
+// event_pump.cs
+// 2016-05-04-9:34
+
+#region
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace gowinder.base_lib.evnt
 {
     public class event_pump : i_event_pump
     {
-        protected Queue<event_base> _queue;
+        protected bool _is_open;
+        protected object _locker;
         //protected Queue<event_base> _queue_recycle;
-        protected Dictionary<String, Queue<event_base>> _map_recycle;
-        protected Object _locker;
-        protected ManualResetEvent _waiter;
-        protected bool _is_open = false;
-        public service_base service {get;protected set;}
+        protected Dictionary<string, Queue<event_base>> _map_recycle;
 
 
         protected string _name;
-        public string id
-        {
-            get
-            {
-                return _name;
-            }
-        }
+        protected Queue<event_base> _queue;
+        protected ManualResetEvent _waiter;
 
 
         public event_pump(string name, service_base ser)
         {
             _name = name;
             _waiter = new ManualResetEvent(false);
-            _locker = new Object();
+            _locker = new object();
             _queue = new Queue<event_base>();
-            _map_recycle = new Dictionary<String, Queue<event_base>>();
+            _map_recycle = new Dictionary<string, Queue<event_base>>();
             //event_builder = new base_event_builder();
             service = ser;
+        }
+
+        public service_base service { get; protected set; }
+
+        public string id
+        {
+            get { return _name; }
         }
 
 
@@ -63,11 +68,8 @@ namespace gowinder.base_lib.evnt
 
                 if (_queue.Count < 1)
                     return null;
-                else
-                {
-                    event_base e = _queue.Dequeue();
-                    return e;
-                }
+                var e = _queue.Dequeue();
+                return e;
             }
         }
 
@@ -111,31 +113,31 @@ namespace gowinder.base_lib.evnt
         {
             if (_map_recycle.ContainsKey(e.event_type))
             {
-                Queue<event_base> queue_recyle = _map_recycle[e.event_type];
+                var queue_recyle = _map_recycle[e.event_type];
                 queue_recyle.Enqueue(e);
             }
             else
             {
-                Queue<event_base> queue_recyle = new Queue<event_base>();
+                var queue_recyle = new Queue<event_base>();
                 queue_recyle.Enqueue(e);
                 _map_recycle[e.event_type] = queue_recyle;
             }
         }
 
 
-        public event_base get_new_event(System.String event_type)
+        public event_base get_new_event(string event_type)
         {
             lock (_locker)
             {
                 if (_map_recycle.ContainsKey(event_type))
                 {
-                    Queue<event_base> queue_recyle = _map_recycle[event_type];
+                    var queue_recyle = _map_recycle[event_type];
                     if (queue_recyle.Count > 0)
                         return queue_recyle.Dequeue();
                 }
                 else
                 {
-                    event_base e = service.event_builder.build_event(event_type);
+                    var e = service.event_builder.build_event(event_type);
                     if (e != null)
                         e.owner_pump = this;
 

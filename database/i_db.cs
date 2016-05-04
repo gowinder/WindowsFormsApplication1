@@ -1,10 +1,13 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.database
+// i_db.cs
+// 2016-05-04-9:34
+
+#region
+
+using MySql.Data.MySqlClient;
+
+#endregion
 
 namespace gowinder.database
 {

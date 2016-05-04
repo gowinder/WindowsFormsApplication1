@@ -1,10 +1,15 @@
-﻿using gowinder.base_lib.evnt;
+﻿// gowinder@hotmail.com
+// gowinder.base_lib
+// service_base.cs
+// 2016-05-04-9:34
+
+#region
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using gowinder.base_lib.evnt;
+
+#endregion
 
 namespace gowinder.base_lib
 {
@@ -12,26 +17,20 @@ namespace gowinder.base_lib
     {
         protected i_event_pump _pump;
         protected Thread _thread;
-        public bool start_own_thread { get; set; }
-        
-        public i_event_builder event_builder { get; protected set; }
 
-        public string name { get; set; }
+        private string fun_name = "thread_process";
 
         public service_base()
         {
+            start_own_thread = true;
             event_builder = on_create_event_builder();
         }
 
-        protected virtual i_event_builder on_create_event_builder()
-        {
-            return new base_event_builder() as i_event_builder;
-        }
+        public bool start_own_thread { get; set; }
 
-        protected virtual i_event_pump create_pump()
-        {
-            return new event_pump(name, this);
-        }
+        public i_event_builder event_builder { get; protected set; }
+
+        public string name { get; set; }
 
         public bool is_running
         {
@@ -44,12 +43,22 @@ namespace gowinder.base_lib
             }
         }
 
+        protected virtual i_event_builder on_create_event_builder()
+        {
+            return new base_event_builder();
+        }
+
+        protected virtual i_event_pump create_pump()
+        {
+            return new event_pump(name, this);
+        }
+
         //         public service_base(int id)
         //         {
         //             _id = id;
         //         }
 
-        public event_base get_new_event(String event_type)
+        public event_base get_new_event(string event_type)
         {
             //             if(_pump == null)
             //                 throw new exception_base(exception_base.RETURN_NULL_REF);
@@ -62,22 +71,18 @@ namespace gowinder.base_lib
             on_process_start();
             while (true)
             {
-
-
                 if (name == "async_load_db_service")
                 {
-                    int zzz = 0;
+                    var zzz = 0;
                 }
 
                 if (is_running)
                     go_tick();
             }
-
         }
 
         protected virtual void on_process_start()
         {
-            
         }
 
         protected void go_tick()
@@ -101,10 +106,7 @@ namespace gowinder.base_lib
 
         protected virtual void on_maintain()
         {
-             
         }
-
-        private string fun_name = "thread_process";
 
         public void start_service()
         {
@@ -114,24 +116,19 @@ namespace gowinder.base_lib
             _pump = create_pump();
             _pump.open();
 
-            this.init();
-            
-            service_thread t = new service_thread(this);
-            ThreadStart threadDelegate = new ThreadStart(t.proc);
+            init();
+
+            var t = new service_thread(this);
+            ThreadStart threadDelegate = t.proc;
             if (start_own_thread)
             {
                 _thread = new Thread(threadDelegate);
                 _thread.Start();
             }
-            else
-            {
-//                this.InvokeRepeating(fun_name, 0.1f, 1.0f);
-            }
         }
 
         protected virtual void init()
         {
-           
         }
 
         public void stop_service()
@@ -145,10 +142,6 @@ namespace gowinder.base_lib
                 if (_thread != null)
                     _thread.Abort();
             }
-            else
-            {
- //               this.CancelInvoke(fun_name);
-            }
         }
 
         protected void process_event_pump()
@@ -160,8 +153,8 @@ namespace gowinder.base_lib
 
                 const int INTERVAL = 50;
 
-                DateTime dt_start = DateTime.Now;
-                event_base e = _pump.pop();
+                var dt_start = DateTime.Now;
+                var e = _pump.pop();
                 //                 for (; ; )
                 //                 {
                 //                     if (e == null)
@@ -181,8 +174,8 @@ namespace gowinder.base_lib
                     e.process();
                     e.recycle();
                 }
-                DateTime dt_end = DateTime.Now;
-                TimeSpan ts = dt_end - dt_start;
+                var dt_end = DateTime.Now;
+                var ts = dt_end - dt_start;
 
                 if (ts.Milliseconds < INTERVAL && start_own_thread)
                     _pump.wait(INTERVAL - ts.Milliseconds);
@@ -205,9 +198,10 @@ namespace gowinder.base_lib
         }
     }
 
-    class service_thread
+    internal class service_thread
     {
         protected service_base _s;
+
         public service_thread(service_base s)
         {
             _s = s;

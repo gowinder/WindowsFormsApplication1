@@ -1,29 +1,24 @@
-﻿using gowinder.database;
-using gowinder.database.evnt;
+﻿// gowinder@hotmail.com
+// gowinder.game_base_lib
+// account_manager.cs
+// 2016-05-04-9:34
+
+#region
+
 using System;
-using System.CodeDom;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using gowinder.base_lib.service;
+using gowinder.database;
+using gowinder.database.evnt;
 using gowinder.game_base_lib.data.account_async;
 using gowinder.net_base;
-using MySql.Data.MySqlClient;
+
+#endregion
 
 namespace gowinder.game_base_lib.data
 {
     public class account_manager
     {
-        public Dictionary<uint, data_default_account> dict_account { get; protected set; }
-        public Dictionary<string, data_default_account> dict_account_unique_name { get; protected set; }
-        public Dictionary<string, data_default_account> dict_token { get; protected set; }
-        public Dictionary<uint, data_default_account> dict_socket_id { get; protected set; }
-
-        protected async_load_queue async_load_queue { get; set; }
-
-        public logic_service service { get; protected set; }
         public account_manager(logic_service ser)
         {
             service = ser;
@@ -35,10 +30,19 @@ namespace gowinder.game_base_lib.data
             async_load_queue = new async_load_queue(this);
         }
 
+        public Dictionary<uint, data_default_account> dict_account { get; protected set; }
+        public Dictionary<string, data_default_account> dict_account_unique_name { get; protected set; }
+        public Dictionary<string, data_default_account> dict_token { get; protected set; }
+        public Dictionary<uint, data_default_account> dict_socket_id { get; protected set; }
+
+        protected async_load_queue async_load_queue { get; set; }
+
+        public logic_service service { get; protected set; }
+
         public virtual void rev_async_load_data(event_async_load_db_response response)
         {
-            async_load_db_response res = response.data as async_load_db_response;
-            data_default_account account = find_account_by_id(res.account_id);
+            var res = response.data as async_load_db_response;
+            var account = find_account_by_id(res.account_id);
             if (account == null)
                 throw new Exception("my_account_manager.rev_async_load_data not found account");
 
@@ -49,19 +53,20 @@ namespace gowinder.game_base_lib.data
             async_load_queue.resume_process_wait_holder(account.id);
         }
 
-        protected virtual void on_rev_async_load_data(data_default_account defalt_account, event_async_load_db_response response)
+        protected virtual void on_rev_async_load_data(data_default_account defalt_account,
+            event_async_load_db_response response)
         {
             throw new NotImplementedException();
         }
 
         public virtual void init()
         {
-            string str_sql = string.Format("select * from account");
-            i_db db = service.get_database(1);
-            MySqlDataReader reader = db.create_reader(str_sql);
+            var str_sql = "select * from account";
+            var db = service.get_database(1);
+            var reader = db.create_reader(str_sql);
             while (reader.Read())
             {
-                data_default_account account = on_create_account();
+                var account = on_create_account();
                 account.read_from_dataset(reader);
                 insert_account(account);
             }
@@ -92,9 +97,10 @@ namespace gowinder.game_base_lib.data
             return null;
         }
 
-        public virtual data_default_account find_account_by_platform_and_user_id(uint platform_id, string platform_user_id)
+        public virtual data_default_account find_account_by_platform_and_user_id(uint platform_id,
+            string platform_user_id)
         {
-            string full_name = data_default_account.get_full_name(platform_id, platform_user_id);
+            var full_name = data_default_account.get_full_name(platform_id, platform_user_id);
             return find_account_by_full_name(full_name);
         }
 
@@ -122,27 +128,21 @@ namespace gowinder.game_base_lib.data
             {
                 if (package.token == "")
                     return account_check_login_result.token_timeout;
-                else
-                {
-                    data_default_account account = find_account_by_token(package.token);
-                    if (account == null)
-                        return account_check_login_result.token_timeout;
-                    else
-                    {
-                        var span = DateTime.Now - account.last_operation_date;
-                        if (span.TotalSeconds >= 30 * 60)
-                            return account_check_login_result.token_timeout;
-                    }
-                }
+                var account = find_account_by_token(package.token);
+                if (account == null)
+                    return account_check_login_result.token_timeout;
+                var span = DateTime.Now - account.last_operation_date;
+                if (span.TotalSeconds >= 30*60)
+                    return account_check_login_result.token_timeout;
             }
             return account_check_login_result.login_ok;
-
         }
 
-        public virtual login_result do_login(net_package this_package, uint platform_id, string user_name, string user_pwd)
+        public virtual login_result do_login(net_package this_package, uint platform_id, string user_name,
+            string user_pwd)
         {
-            string full_name = data_default_account.get_full_name(platform_id, user_name);
-            data_default_account account = find_account_by_full_name(full_name);
+            var full_name = data_default_account.get_full_name(platform_id, user_name);
+            var account = find_account_by_full_name(full_name);
             if (account == null)
             {
                 return login_result.no_account;
@@ -153,29 +153,30 @@ namespace gowinder.game_base_lib.data
                 //  TODO LIST check async_load_queue has this account in wait
                 if (async_load_queue.dict_wait_holder.ContainsKey(account.id))
                 {
-                    async_load_account_wait_holder wait_holder = async_load_queue.dict_wait_holder[account.id];
+                    var wait_holder = async_load_queue.dict_wait_holder[account.id];
                     wait_holder.list_wait_action.Add(this_package);
                 }
                 else
                 {
-                    async_load_db_service async_load_ser =
-                                        service_manager.instance().get_serivce(async_load_db_service.default_name) as async_load_db_service;
+                    var async_load_ser =
+                        service_manager.instance().get_serivce(async_load_db_service.default_name) as
+                            async_load_db_service;
                     if (async_load_ser == null)
                         throw new Exception("account_manager.do_login cannot get async_load_db_service");
 
-                    event_async_load_db_request event_load_request =
+                    var event_load_request =
                         async_load_ser.get_new_event(event_async_load_db_request.type) as event_async_load_db_request;
                     if (event_load_request == null)
                         throw new Exception("account_manager.do_login cannot get new event_async_load_db_request");
 
-                    async_load_db_request load_request = new async_load_db_request();
+                    var load_request = new async_load_db_request();
                     load_request.account_id = account.id;
                     load_request.type = 0;
                     load_request.db_index = 1;
-                    event_load_request.set(this.service, async_load_ser, load_request);
+                    event_load_request.set(service, async_load_ser, load_request);
                     event_load_request.send();
 
-                    async_load_account_wait_holder wait_holder = new async_load_account_wait_holder(account.id);
+                    var wait_holder = new async_load_account_wait_holder(account.id);
                     wait_holder.list_wait_action.Add(this_package);
                     async_load_queue.dict_wait_holder.Add(account.id, wait_holder);
                 }

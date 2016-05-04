@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.net_base
+// net_json_name.cs
+// 2016-05-04-9:34
 
 namespace gowinder.net_base
 {

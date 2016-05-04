@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.net_base
+// net_package_type.cs
+// 2016-05-04-9:35
 
 namespace gowinder.net_base
 {
@@ -13,6 +12,6 @@ namespace gowinder.net_base
         action = 2,
         query = 4,
         gm_action = 5,
-        gm_query = 6,
+        gm_query = 6
     }
 }

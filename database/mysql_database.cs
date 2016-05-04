@@ -1,37 +1,41 @@
-﻿using MySql.Data.MySqlClient;
+﻿// gowinder@hotmail.com
+// gowinder.database
+// mysql_database.cs
+// 2016-05-04-9:34
+
+#region
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+
+#endregion
 
 namespace gowinder.database
 {
-    class mysql_database : i_db
+    internal class mysql_database : i_db
     {
-        MySqlConnection _connection;
+        private MySqlConnection _connection;
 
         public void open(string host, string db_name, string user_name, string user_pwd, int port)
         {
-            string str_conn = string.Format("server={0};User Id={1};password={2};Database={3}", host, user_name, user_pwd, db_name);
+            var str_conn = string.Format("server={0};User Id={1};password={2};Database={3}", host, user_name, user_pwd,
+                db_name);
             _connection = new MySqlConnection(str_conn);
             _connection.Open();
         }
 
         public MySqlDataReader create_reader(string str_sql)
         {
-            MySqlCommand cmd = new MySqlCommand(str_sql, _connection);
+            var cmd = new MySqlCommand(str_sql, _connection);
             return cmd.ExecuteReader();
         }
 
         public int execute_no_query(string str_sql)
         {
-           
-            throw new NotImplementedException(); MySqlCommand cmd = new MySqlCommand(str_sql, _connection);
-          
+            throw new NotImplementedException();
+            var cmd = new MySqlCommand(str_sql, _connection);
+
             return cmd.ExecuteNonQuery();
         }
-
-        
     }
 }

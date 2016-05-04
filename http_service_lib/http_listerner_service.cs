@@ -1,86 +1,92 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿// gowinder@hotmail.com
+// gowinder.http_service_lib
+// http_listerner_service.cs
+// 2016-05-04-9:34
+
+#region
+
+using System;
+using System.IO;
 using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using gowinder.base_lib;
-using gowinder.server_lib;
-using gowinder.net_base;
-using System.IO;
-using gowinder.base_lib.service;
 using gowinder.http_service_lib;
-using gowinder.http_service_lib.evnt;
+using gowinder.net_base;
 using gowinder.net_base.evnt;
-using ProtoBuf;
+
+#endregion
 
 namespace gowinder.http_service
 {
     public class http_listerner_service : service_base
     {
-        public i_net_context_manager context_manager { get; set; }
+        private uint _current_id;
 
-        public i_net_package_string_parser net_package_parser { get; set; }
-       
-        public service_base receive_package_service { get; set; }
+        protected HttpListener _listener;
 
         public http_listerner_service()
         {
             name = "http_listerner_service";
             _listener = new HttpListener();
             _listener.Prefixes.Add("http://127.0.0.1:9981/test_request/");
-            
         }
+
+        public i_net_context_manager context_manager { get; set; }
+
+        public i_net_package_parser net_package_parser { get; set; }
+
+        public service_base receive_package_service { get; set; }
         public service_base http_ser { get; set; }
-        private uint _current_id = 0;
-        protected uint current_id { get { return ++_current_id; }  }
+
+        protected uint current_id
+        {
+            get { return ++_current_id; }
+        }
 
         protected override void on_process_start()
         {
-            if(net_package_parser == null)
+            if (net_package_parser == null)
                 throw new Exception("http_listerner_service has not assigned i_net_package_parser");
 
-            if(receive_package_service == null)
+            if (receive_package_service == null)
                 throw new Exception("http_listerner_service has not assigned receive_package_service");
             Task.Run(run);
         }
 
-        protected HttpListener _listener;
         public Task run()
+        {
+            init();
+            return Task.Run(() =>
             {
-                init();
-                return Task.Run(() =>
+                try
                 {
-                    try
+                    _listener.Start();
+                }
+                catch (HttpListenerException hlex)
+                {
+                    return;
+                }
+                Console.WriteLine("run-> begin while, thread={0}, task={1}", Thread.CurrentThread.ManagedThreadId,
+                    Task.CurrentId);
+                var sem = new Semaphore(5, 5);
+                while (true)
+                {
+                    if (sem.WaitOne(50))
                     {
-                        _listener.Start();
-                    }
-                    catch (HttpListenerException hlex)
-                    {
-
-                        return;
-                    }
-                    Console.WriteLine("run-> begin while, thread={0}, task={1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
-                    var sem = new Semaphore(5, 5);
-                    while (true)
-                    {
-                        if (sem.WaitOne(50))
+                        _listener.GetContextAsync().ContinueWith(async t =>
                         {
-                            _listener.GetContextAsync().ContinueWith(async (t) =>
-                            {
-                                sem.Release();
-                                Console.WriteLine("run-> while, thread={0}, task={1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
-                                var ctx = await t;
-                                process_request(ctx, this);
-                            });
-                        }
-                    //    sim_process_context();
+                            sem.Release();
+                            Console.WriteLine("run-> while, thread={0}, task={1}", Thread.CurrentThread.ManagedThreadId,
+                                Task.CurrentId);
+                            var ctx = await t;
+                            process_request(ctx, this);
+                        });
                     }
-                });
-            }
+                    //    sim_process_context();
+                }
+            });
+        }
 
         private void init()
         {
@@ -92,46 +98,30 @@ namespace gowinder.http_service
             Console.WriteLine("process_request, thread={0}, task={1}", Thread.CurrentThread.ManagedThreadId,
                 Task.CurrentId);
 
-            Stream s = ctx.Request.InputStream;
-            uint id = Convert.ToUInt32(ctx.Request.QueryString["id"]);
-            long end_time = Convert.ToInt32(ctx.Request.QueryString["sleep"]);
-            end_time += utility.get_tick();
-            var my_context = new http_net_context(this.current_id, end_time);
+            var my_context = new http_net_context(context_manager.get_new_id());
             my_context.ctx = ctx;
 
 
             string input_text;
             using (var reader = new StreamReader(ctx.Request.InputStream,
-                                     ctx.Request.ContentEncoding))
+                ctx.Request.ContentEncoding))
             {
                 input_text = reader.ReadToEnd();
             }
 
             if (input_text != "")
             {
-                net_package p = net_package_parser.parse(input_text);
+                var p = net_package_parser.parse(input_text, 0, input_text.Length);
                 p.from_service = http_ser;
                 p.carrier = net_package_carrier.http;
-                event_receive_package e = receive_package_service.get_new_event(event_receive_package.type) as event_receive_package;
-                receive_package_info info = new receive_package_info() {context = my_context,package = p};
+                var e = receive_package_service.get_new_event(event_receive_package.type) as event_receive_package;
+                var info = new receive_package_info {context = my_context, package = p};
                 p.owner = info;
                 e.set(http_ser, receive_package_service, info);
                 e.send();
 
                 context_manager.add_context(my_context);
             }
-            else
-            {
-                
-            }
-
-
-            
         }
     }
-          
-
-        
 }
-
-
