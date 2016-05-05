@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="default_socket_net_package_parser.cs" />
     <Compile Include="evnt\event_socket_send_package.cs" />
     <Compile Include="socket_package.cs" />
     <Compile Include="socket_listerner_service.cs" />

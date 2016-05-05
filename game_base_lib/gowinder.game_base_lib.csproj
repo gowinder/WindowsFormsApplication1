@@ -55,6 +55,7 @@
     <Compile Include="evnt\event_logic_receive_package.cs" />
     <Compile Include="logic_service.cs" />
     <Compile Include="data\account_manager.cs" />
+    <Compile Include="net\socket_string_net_package_parser.cs" />
     <Compile Include="net\http_string_net_package_parser.cs" />
     <Compile Include="net\net_package_action.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +69,10 @@
     <ProjectReference Include="..\gowinder.net_base\gowinder.net_base.csproj">
       <Project>{a1a06dee-31af-41f3-ac82-33e5e345d6bf}</Project>
       <Name>gowinder.net_base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gowinder.socket_service_lib\gowinder.socket_service_lib.csproj">
+      <Project>{6a69e6f2-f591-4e26-9f24-8797de8e9241}</Project>
+      <Name>gowinder.socket_service_lib</Name>
     </ProjectReference>
     <ProjectReference Include="..\http_service_lib\gowinder.http_service_lib.csproj">
       <Project>{ca5e4a24-085c-4bb9-ae5e-2bc804770f50}</Project>

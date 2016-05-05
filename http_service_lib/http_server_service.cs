@@ -22,7 +22,7 @@ using Newtonsoft.Json.Linq;
 
 namespace gowinder.http_service_lib
 {
-    public class http_service : service_base, i_net_context_manager
+    public class http_server_service : service_base, i_net_context_manager
     {
         public static string default_name = "http_service";
 
@@ -33,7 +33,7 @@ namespace gowinder.http_service_lib
 
         protected object _lock_dict_context;
 
-        public http_service()
+        public http_server_service()
         {
             name = default_name;
             dict_context = new Dictionary<uint, net_context>();

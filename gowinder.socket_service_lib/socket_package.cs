@@ -16,11 +16,23 @@ namespace gowinder.socket_service_lib
         public socket_package(service_base from_service, int s, byte[] buff, int offset, int length):base(from_service)
         {
             size = (uint)s;
-            data = new byte[length];
-            byte[] bufffer = data as byte[];
-            Array.Copy(buff, offset, bufffer, 0, length);
+            byte[] temp_buffer = new byte[length];
+            Array.Copy(buff, offset, temp_buffer, 0, length);
+
+            this.data = Convert.ToString(temp_buffer) as string;
+
+
 
             is_parsed = false;
+        }
+
+        public override void parse_data()
+        {
+            string str_json = this.data as string;
+            if(str_json == null)
+                throw new ArgumentException("socket_package.parse_data");
+
+
         }
     }
 }

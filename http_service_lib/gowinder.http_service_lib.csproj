@@ -55,7 +55,7 @@
     <Compile Include="evnt\event_http_send_package.cs" />
     <Compile Include="http_listerner_service.cs" />
     <Compile Include="http_net_context.cs" />
-    <Compile Include="http_service.cs" />
+    <Compile Include="http_server_service.cs" />
     <Compile Include="i_http_dispatch_service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -19,10 +19,17 @@ namespace gowinder.socket_service_lib
 {
     public class socket_service : service_base, i_net_context_manager
     {
+        public enum service_type
+        {
+            server,
+            client,
+        }
         protected object _lock_context_id;
 
         protected object _lock_dict_context;
         private uint _socket_id;
+
+        
 
         public socket_service()
         {

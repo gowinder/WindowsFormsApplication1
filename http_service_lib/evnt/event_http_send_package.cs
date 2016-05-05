@@ -17,7 +17,7 @@ namespace gowinder.http_service_lib.evnt
     {
         public override void process()
         {
-            var service = to_service as http_service;
+            var service = to_service as http_server_service;
             if (service == null)
                 throw new Exception("event_http_send_package.process to service is not http_service");
 

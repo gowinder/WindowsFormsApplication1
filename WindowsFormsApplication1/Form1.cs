@@ -32,7 +32,7 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
-        private http_service service { get; set; }
+        private http_server_service service { get; set; }
         private async_save_db_service async_save_db_service { get; set; }
 
         private void button1_Click(object sender, EventArgs e)
@@ -104,7 +104,7 @@ namespace WindowsFormsApplication1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            var http_ser = new http_service {start_own_thread = true};
+            var http_ser = new http_server_service {start_own_thread = true};
             var logic_ser = new my_logic_service {start_own_thread = true};
             var http_listerner_ser = new http_listerner_service
             {
@@ -120,7 +120,7 @@ namespace WindowsFormsApplication1
 
             var socket_ser = new socket_service();
             var socket_listerner_ser = new socket_listerner_service(socket_ser) {receive_package_service = logic_ser, send_package_service = socket_ser};
-            var socket_net_package_parser = new default_socket_net_package_parser(socket_ser, logic_ser);
+            var socket_net_package_parser = new socket_string_net_package_parser(socket_ser, logic_ser);
             socket_listerner_ser.net_package_parser = socket_net_package_parser;
             
 
