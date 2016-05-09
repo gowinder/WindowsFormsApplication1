@@ -7,6 +7,7 @@ using System;
 using System.Runtime.InteropServices;
 using gowinder.base_lib;
 using gowinder.net_base;
+using System.Text;
 
 namespace gowinder.socket_service_lib
 {
@@ -24,6 +25,14 @@ namespace gowinder.socket_service_lib
 
 
             is_parsed = false;
+        }
+
+        public override byte[] get_transfer_buffer()
+        {
+            string str_json = this.data as string;
+            if (str_json == null)
+                throw new ArgumentException("socket_package.get_transfer_buffer");
+            return Encoding.UTF8.GetBytes(str_json);
         }
 
         public override void parse_data()

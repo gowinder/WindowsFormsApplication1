@@ -43,6 +43,11 @@ namespace gowinder.net_base
         public service_base process_service { get; set; }
         public object owner { get; set; }
 
+        public virtual byte[] get_transfer_buffer()
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual int ret
         {
             get

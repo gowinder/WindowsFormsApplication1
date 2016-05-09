@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="connect_socket_status.cs" />
+    <Compile Include="evnt\event_socket_connect_request.cs" />
+    <Compile Include="evnt\event_socket_connect_response.cs" />
     <Compile Include="evnt\event_socket_send_package.cs" />
     <Compile Include="socket_package.cs" />
     <Compile Include="socket_listerner_service.cs" />
