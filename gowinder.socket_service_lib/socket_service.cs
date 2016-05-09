@@ -82,7 +82,9 @@ namespace gowinder.socket_service_lib
 
         public void send_package(send_package_info send_package_info)
         {
-            throw new NotImplementedException();
+            socket_net_context context = find_by_id(send_package_info.context_id) as socket_net_context;
+            if(context == null)
+                throw new Exception("socket_service send_package socket_net_context not found id=" + send_package_info.context_id);
         }
 
         protected override i_event_builder on_create_event_builder()
@@ -92,12 +94,12 @@ namespace gowinder.socket_service_lib
 
         protected override void on_process_start()
         {
-            throw new NotImplementedException();
+            
         }
 
         protected override void on_maintain()
         {
-            throw new NotImplementedException();
+            
         }
 
         protected override void init()

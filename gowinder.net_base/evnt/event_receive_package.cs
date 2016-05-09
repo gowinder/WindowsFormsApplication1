@@ -15,7 +15,8 @@ namespace gowinder.net_base.evnt
 {
     public class receive_package_info
     {
-        public net_context context { get; set; }
+ //       public net_context context { get; set; }
+        public uint context_id { get; set; }
         public net_package package { get; set; }
     }
     

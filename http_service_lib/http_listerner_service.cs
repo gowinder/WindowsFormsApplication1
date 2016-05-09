@@ -115,7 +115,7 @@ namespace gowinder.http_service
                 p.from_service = http_ser;
                 p.carrier = net_package_carrier.http;
                 var e = receive_package_service.get_new_event(event_receive_package.type) as event_receive_package;
-                var info = new receive_package_info {context = my_context, package = p};
+                var info = new receive_package_info {context_id = my_context.id, package = p};
                 p.owner = info;
                 e.set(http_ser, receive_package_service, info);
                 e.send();

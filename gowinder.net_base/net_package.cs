@@ -110,7 +110,7 @@ namespace gowinder.net_base
             var recv_info = owner as receive_package_info;
             if (recv_info == null)
                 throw new Exception("package_action.send_back owner as receive_package_info is null");
-            var send_info = new send_package_info {context = recv_info.context, package = this};
+            var send_info = new send_package_info {context_id = recv_info.context_id, package = this};
             owner = send_info;
 
             temp_e.set(send_back_from_service, from_service, send_info);

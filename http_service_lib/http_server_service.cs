@@ -95,9 +95,9 @@ namespace gowinder.http_service_lib
         {
             if (info == null)
                 throw new Exception("http_service.send_response send_package_info is null");
-            if (info.context == null)
-                throw new Exception("http_service.send_response send_package_info.context is null");
-            var mctx = info.context as http_net_context;
+            if (info.context_id == 0)
+                throw new Exception("http_service.send_response send_package_info.context_id is zero");
+            var mctx = find_by_id(info.context_id) as http_net_context;
             if (mctx == null)
                 throw new Exception("http_service.send_response info.context is not http_net_context");
             Task.Run(async () =>

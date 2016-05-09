@@ -114,7 +114,7 @@ namespace gowinder.socket_service_lib
                         
                         var evnt = receive_package_service.get_new_event(event_receive_package.type) as event_receive_package;
 
-                        var info = new receive_package_info { context = this, package = p };
+                        var info = new receive_package_info { context_id = this.id, package = p };
                         p.owner = info;
                         evnt.set(send_package_service, receive_package_service, info);
                         evnt.send();
