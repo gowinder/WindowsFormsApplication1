@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// gowinder@hotmail.com
+// gowinder.socket_service_lib
+// connect_socket_status.cs
+// 2016-05-10-14:11
 
 namespace gowinder.socket_service_lib
 {
@@ -10,6 +9,6 @@ namespace gowinder.socket_service_lib
     {
         connected = 1,
         failed = 2,
-        disconnected = 3,
+        disconnected = 3
     }
 }

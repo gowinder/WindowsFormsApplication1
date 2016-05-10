@@ -1,12 +1,14 @@
 ﻿// gowinder@hotmail.com
 // gowinder.socket_service_lib
 // socket_service.cs
-// 2016-05-04-9:35
+// 2016-05-10-14:11
 
 #region
 
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using gowinder.base_lib;
 using gowinder.base_lib.evnt;
 using gowinder.net_base;
@@ -22,13 +24,13 @@ namespace gowinder.socket_service_lib
         public enum service_type
         {
             server,
-            client,
+            client
         }
+
         protected object _lock_context_id;
 
         protected object _lock_dict_context;
         private uint _socket_id;
-        public service_type server_cient_type { get; protected set; }
 
 
         public socket_service(service_type type)
@@ -40,8 +42,11 @@ namespace gowinder.socket_service_lib
             dict_context_by_session_id = new Dictionary<uint, net_context>();
         }
 
+        public service_type server_cient_type { get; protected set; }
+
         protected Dictionary<uint, net_context> dict_context { get; set; }
         protected Dictionary<uint, net_context> dict_context_by_session_id { get; set; }
+        public i_net_package_parser net_package_parser { get; set; }
 
         protected uint new_socket_id
         {
@@ -67,27 +72,6 @@ namespace gowinder.socket_service_lib
             }
         }
 
-        internal void connect(event_socket_connect_request event_request)
-        {
-            socket_connect_info info = event_request.connect_info;
-            if (server_cient_type != service_type.client)
-                throw new Exception("socket_service.connect is not a server type service");
-
-            socket_net_context context = find_by_session_id(info.session_id);
-            if(context != null)
-            {
-                
-            }
-        }
-
-        public socket_net_context find_by_session_id(uint session_id)
-        {
-            if (!dict_context_by_session_id.ContainsKey(session_id))
-                return null;
-
-            return dict_context_by_session_id[session_id] as socket_net_context;
-        }
-
         public void remove_by_id(uint id)
         {
             lock (_lock_dict_context)
@@ -104,13 +88,48 @@ namespace gowinder.socket_service_lib
             }
         }
 
+        internal void connect(event_socket_connect_request event_request)
+        {
+            var info = event_request.connect_info;
+            if (server_cient_type != service_type.client)
+                throw new Exception("socket_service.connect is not a server type service");
+
+            var context = find_by_session_id(info.session_id);
+            if (context == null)
+            {
+                var socket = new Socket(AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp);
+                socket.Blocking = false;
+               
+               
+                context = new socket_net_context(net_package_parser, new_socket_id, socket);
+                context.connect(event_request);
+            }
+            else
+            {
+                if (context.status != socket_net_context.connect_status.disconnected)
+                {
+                    context.connect(event_request);
+                }
+            }
+        }
+        public socket_net_context find_by_session_id(uint session_id)
+        {
+            if (!dict_context_by_session_id.ContainsKey(session_id))
+                return null;
+
+            return dict_context_by_session_id[session_id] as socket_net_context;
+        }
+
         public void send_package(send_package_info send_package_info)
         {
-            socket_net_context context = find_by_id(send_package_info.context_id) as socket_net_context;
-            if(context == null)
-                throw new Exception("socket_service send_package socket_net_context not found id=" + send_package_info.context_id);
+            var context = find_by_id(send_package_info.context_id) as socket_net_context;
+            if (context == null)
+                throw new Exception("socket_service send_package socket_net_context not found id=" +
+                                    send_package_info.context_id);
 
-            byte[] buffer = send_package_info.package.get_transfer_buffer();
+            var buffer = send_package_info.package.get_transfer_buffer();
             if (buffer == null)
                 throw new Exception("");
             context.send(buffer, 0, buffer.Length);
@@ -123,12 +142,10 @@ namespace gowinder.socket_service_lib
 
         protected override void on_process_start()
         {
-            
         }
 
         protected override void on_maintain()
         {
-            
         }
 
         protected override void init()
@@ -151,9 +168,9 @@ namespace gowinder.socket_service_lib
                     }
                         break;
                     case event_socket_connect_request.type:
-                        {
-                            return new event_socket_connect_request();
-                        }
+                    {
+                        return new event_socket_connect_request();
+                    }
                         break;
                 }
 

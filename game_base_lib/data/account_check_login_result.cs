@@ -1,7 +1,7 @@
 ﻿// gowinder@hotmail.com
 // gowinder.game_base_lib
 // account_check_login_result.cs
-// 2016-05-04-9:34
+// 2016-05-10-14:11
 
 namespace gowinder.game_base_lib.data
 {

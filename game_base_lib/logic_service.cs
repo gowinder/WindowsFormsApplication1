@@ -1,7 +1,7 @@
 ﻿// gowinder@hotmail.com
 // gowinder.game_base_lib
 // logic_service.cs
-// 2016-05-04-9:34
+// 2016-05-10-14:11
 
 #region
 
@@ -12,6 +12,7 @@ using gowinder.game_base_lib.data;
 using gowinder.game_base_lib.evnt;
 using gowinder.net_base;
 using gowinder.net_base.evnt;
+using gowinder.socket_service_lib.evnt;
 
 #endregion
 
@@ -85,6 +86,9 @@ namespace gowinder.game_base_lib
                 {
                     case event_receive_package.type:
                         return new event_logic_receive_package();
+                        break;
+                    case event_socket_connect_response.type:
+                        return new event_socket_connect_response();
                 }
 
                 return null;

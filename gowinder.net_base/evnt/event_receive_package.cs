@@ -1,11 +1,10 @@
 ﻿// gowinder@hotmail.com
 // gowinder.net_base
 // event_receive_package.cs
-// 2016-05-04-9:34
+// 2016-05-10-14:11
 
 #region
 
-using System;
 using gowinder.base_lib;
 using gowinder.base_lib.evnt;
 
@@ -15,11 +14,11 @@ namespace gowinder.net_base.evnt
 {
     public class receive_package_info
     {
- //       public net_context context { get; set; }
+        //       public net_context context { get; set; }
         public uint context_id { get; set; }
         public net_package package { get; set; }
     }
-    
+
     public class event_receive_package : event_base
     {
         public const string type = "event_receive_package";

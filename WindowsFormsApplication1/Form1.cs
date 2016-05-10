@@ -1,7 +1,7 @@
 ﻿// gowinder@hotmail.com
 // gowinder.WindowsFormsApplication1
 // Form1.cs
-// 2016-05-04-9:34
+// 2016-05-10-14:11
 
 #region
 
@@ -119,10 +119,15 @@ namespace WindowsFormsApplication1
             var async_load_db_ser = new my_async_load_db_service();
 
             var socket_ser = new socket_service(socket_service.service_type.server);
-            var socket_listerner_ser = new socket_listerner_service(socket_ser) {receive_package_service = logic_ser, send_package_service = socket_ser};
+            var socket_listerner_ser = new socket_listerner_service(socket_ser)
+            {
+                receive_package_service = logic_ser,
+                send_package_service = socket_ser
+            };
             var socket_net_package_parser = new socket_string_net_package_parser(socket_ser, logic_ser);
             socket_listerner_ser.net_package_parser = socket_net_package_parser;
-            
+            socket_ser.net_package_parser = socket_net_package_parser;
+
 
             service_manager.instance().add_service(http_ser);
             service_manager.instance().add_service(http_listerner_ser);

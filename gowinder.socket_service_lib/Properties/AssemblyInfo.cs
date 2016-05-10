@@ -1,7 +1,7 @@
 ﻿// gowinder@hotmail.com
 // gowinder.socket_service_lib
 // AssemblyInfo.cs
-// 2016-05-04-9:35
+// 2016-05-10-14:11
 
 #region
 

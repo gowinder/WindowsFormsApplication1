@@ -1,7 +1,7 @@
 ﻿// gowinder@hotmail.com
 // gowinder.net_base
 // net_package_type.cs
-// 2016-05-04-9:35
+// 2016-05-10-14:11
 
 namespace gowinder.net_base
 {

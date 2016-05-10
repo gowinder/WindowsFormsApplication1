@@ -1,7 +1,7 @@
 ﻿// gowinder@hotmail.com
 // gowinder.game_base_lib
-// my_net_package_parser.cs
-// 2016-05-04-9:34
+// http_string_net_package_parser.cs
+// 2016-05-10-14:11
 
 #region
 
@@ -26,8 +26,8 @@ namespace WindowsFormsApplication1.data
 
         public net_package parse(object data, int offset, int length)
         {
-            string buff = data as string;
-            if(buff == null)
+            var buff = data as string;
+            if (buff == null)
                 throw new ArgumentException("");
             var json_root = JObject.Parse(buff);
             var package_type = (net_package_type) (int) json_root[net_json_name.package_type];

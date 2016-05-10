@@ -1,7 +1,7 @@
 ﻿// gowinder@hotmail.com
 // gowinder.WindowsFormsApplication1
 // my_logic_service.cs
-// 2016-05-04-9:34
+// 2016-05-10-14:11
 
 #region
 
@@ -47,10 +47,10 @@ namespace WindowsFormsApplication1.service
             }
         }
 
-// 
+//         {
 //         public override void receive_package(event_receive_package package)
 
-//         {
+// 
 //             receive_package_info info = package.data as receive_package_info;
 //             if(info == null)
 //                 throw new Exception("my_logic_service.receive_package package.data is not receive_package_info");

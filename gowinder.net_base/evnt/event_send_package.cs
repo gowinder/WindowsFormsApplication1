@@ -1,7 +1,7 @@
 ﻿// gowinder@hotmail.com
 // gowinder.net_base
 // event_send_package.cs
-// 2016-05-04-9:34
+// 2016-05-10-14:11
 
 #region
 
@@ -16,7 +16,7 @@ namespace gowinder.net_base.evnt
     [Serializable]
     public class send_package_info
     {
-    //  public net_context context { get; set; }
+        //  public net_context context { get; set; }
         public uint context_id { get; set; }
         public net_package package { get; set; }
     }

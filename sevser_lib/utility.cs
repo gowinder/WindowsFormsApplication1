@@ -1,7 +1,7 @@
 ﻿// gowinder@hotmail.com
 // gowinder.base_lib
 // utility.cs
-// 2016-05-04-9:34
+// 2016-05-10-14:11
 
 #region
 

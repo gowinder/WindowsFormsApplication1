@@ -1,7 +1,7 @@
 ﻿// gowinder@hotmail.com
 // gowinder.net_base
 // net_package.cs
-// 2016-05-04-9:34
+// 2016-05-10-14:11
 
 #region
 
@@ -42,11 +42,6 @@ namespace gowinder.net_base
         public service_base from_service { get; set; }
         public service_base process_service { get; set; }
         public object owner { get; set; }
-
-        public virtual byte[] get_transfer_buffer()
-        {
-            throw new NotImplementedException();
-        }
 
         public virtual int ret
         {
@@ -93,15 +88,19 @@ namespace gowinder.net_base
             process();
         }
 
-        public virtual void parse_data()
-        {
-            
-        }
-
         public object Clone()
         {
             var c = new net_package(from_service);
             return c;
+        }
+
+        public virtual byte[] get_transfer_buffer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void parse_data()
+        {
         }
 
         /// <summary>
