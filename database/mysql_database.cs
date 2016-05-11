@@ -32,7 +32,6 @@ namespace gowinder.database
 
         public int execute_no_query(string str_sql)
         {
-            throw new NotImplementedException();
             var cmd = new MySqlCommand(str_sql, _connection);
 
             return cmd.ExecuteNonQuery();
