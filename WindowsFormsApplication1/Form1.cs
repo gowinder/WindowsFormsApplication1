@@ -106,7 +106,7 @@ namespace WindowsFormsApplication1
         {
             var http_ser = new http_server_service {start_own_thread = true};
             var logic_ser = new my_logic_service {start_own_thread = true};
-            var http_listerner_ser = new http_listerner_service
+            var http_listerner_ser = new http_listerner_service("http://127.0.0.1:9981/test_request/")
             {
                 start_own_thread = true,
                 context_manager = http_ser,

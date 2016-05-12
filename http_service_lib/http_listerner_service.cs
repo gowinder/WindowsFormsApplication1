@@ -25,11 +25,11 @@ namespace gowinder.http_service
 
         protected HttpListener _listener;
 
-        public http_listerner_service()
+        public http_listerner_service(string host_address)
         {
             name = "http_listerner_service";
             _listener = new HttpListener();
-            _listener.Prefixes.Add("http://127.0.0.1:9981/test_request/");
+            _listener.Prefixes.Add(host_address);
         }
 
         public i_net_context_manager context_manager { get; set; }
