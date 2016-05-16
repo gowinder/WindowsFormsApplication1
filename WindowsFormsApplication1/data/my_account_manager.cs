@@ -21,14 +21,14 @@ namespace WindowsFormsApplication1.data
         {
         }
 
-        protected override void on_rev_async_load_data(data_default_account default_account,
+        protected override void on_rev_async_load_data(game_data_default_account default_account,
             event_async_load_db_response response)
         {
-            var account = default_account as data_account;
+            var account = default_account as game_data_account;
             var res = response.data as async_load_db_response;
             if (res == null)
                 throw new Exception(
-                    "my_account_manager.on_rev_async_load_data response.data is not async_load_db_response");
+                    "my_account_manager.on_rev_async_load_data response.game_data is not async_load_db_response");
             var load_data = res.dict_result;
             foreach (var key in load_data.Keys)
             {
@@ -53,9 +53,9 @@ namespace WindowsFormsApplication1.data
             base.init();
         }
 
-        protected override data_default_account on_create_account()
+        protected override game_data_default_account on_create_account()
         {
-            return new data_account();
+            return new game_data_account();
         }
     }
 }

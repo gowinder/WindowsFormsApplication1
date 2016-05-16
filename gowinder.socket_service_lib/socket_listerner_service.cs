@@ -16,8 +16,15 @@ namespace gowinder.socket_service_lib
 {
     public class socket_listerner_service : service_base
     {
-        public socket_listerner_service(i_net_context_manager context_manager)
+        public static string default_name = "socket_listerner_service";
+        public socket_listerner_service(i_net_context_manager context_manager, string service_name = "")
         {
+            if (service_name == "")
+                name = default_name;
+            else
+            {
+                name = service_name;
+            }
             net_context_manager = context_manager;
         }
 

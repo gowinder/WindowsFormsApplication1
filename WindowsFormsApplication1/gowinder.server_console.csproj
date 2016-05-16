@@ -7,8 +7,8 @@
     <ProjectGuid>{BBDB646E-DDD1-4151-8E0F-F32350A8ED73}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication1</RootNamespace>
-    <AssemblyName>WindowsFormsApplication1</AssemblyName>
+    <RootNamespace>gowinder.server_console</RootNamespace>
+    <AssemblyName>gowinder.server_console</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -67,7 +67,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="data\data_account.cs" />
+    <Compile Include="data\data_role.cs" />
+    <Compile Include="data\game_data_account.cs" />
     <Compile Include="data\data_fort.cs" />
     <Compile Include="data\data_item.cs" />
     <Compile Include="data\data_login.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -130,6 +132,10 @@
     <ProjectReference Include="..\game_base_lib\gowinder.game_base_lib.csproj">
       <Project>{c79ccfa4-872d-4343-bcdf-1c7735ce6ae5}</Project>
       <Name>gowinder.game_base_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\game_logic_lib\game_logic_lib.csproj">
+      <Project>{18dc39c4-448d-4172-92f3-2a2653952854}</Project>
+      <Name>game_logic_lib</Name>
     </ProjectReference>
     <ProjectReference Include="..\gowinder.net_base\gowinder.net_base.csproj">
       <Project>{a1a06dee-31af-41f3-ac82-33e5e345d6bf}</Project>

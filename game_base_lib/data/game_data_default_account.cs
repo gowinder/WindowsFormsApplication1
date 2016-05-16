@@ -1,20 +1,21 @@
 ﻿// gowinder@hotmail.com
 // gowinder.game_base_lib
-// data_default_account.cs
+// game_data_default_account.cs
 // 2016-05-10-14:11
 
 #region
 
 using System;
+using gowinder.base_lib;
 using MySql.Data.MySqlClient;
 
 #endregion
 
 namespace gowinder.game_base_lib.data
 {
-    public class data_default_account
+    public class game_data_default_account : game_data_basic
     {
-        public data_default_account()
+        public game_data_default_account(service_base owner_serivce):base(owner_serivce)
         {
             full_loaded = false;
         }
@@ -66,6 +67,20 @@ namespace gowinder.game_base_lib.data
         public virtual void update_operation_time()
         {
             last_operation_date = DateTime.Now;
+        }
+
+        protected override void init_fields()
+        {
+            fields_name.Add("id");
+            fields.Add(0);
+
+            fields_name.Add("name");
+            fields.Add("");
+
+            fields_name.Add("role_id");
+            fields.Add(0);
+            
+
         }
     }
 }

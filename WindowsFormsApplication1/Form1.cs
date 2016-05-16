@@ -1,7 +1,7 @@
 ﻿// gowinder@hotmail.com
 // gowinder.WindowsFormsApplication1
 // Form1.cs
-// 2016-05-10-14:11
+// 2016-05-13-12:17
 
 #region
 
@@ -19,6 +19,7 @@ using gowinder.socket_service_lib;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 using NLog;
 
 #endregion
@@ -84,6 +85,35 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
+            var schemaJson = @"{
+                  'description': 'A person',
+                  'type': 'object',
+                  'properties': {
+                    'name': {'type':'string'},
+                    'hobbies': {
+                      'type': 'array',
+                      'items': {'type':'string'}
+                    }
+                  }
+                }";
+            var schema = JsonSchema.Parse(schemaJson);
+            JObject jobj = (JObject) JsonConvert.DeserializeObject(schemaJson);
+            Console.WriteLine(schema.Type);
+            // Object
+
+            JToken token = jobj.SelectToken("data");
+            var json_data = (JObject)jobj["data"];
+
+            foreach (var property in schema.Properties)
+            {
+                Console.WriteLine(property.Key + " - " + property.Value.Type);
+            }
+
+            foreach (var property in jobj.Properties())
+            {
+                Console.WriteLine(property.Name + " - " + property.Value);
+            }
+            return;
             var conn = new MySqlConnection("server=localhost;User Id=root;password=asdf;Database=pd");
             conn.Open();
             var command = new MySqlCommand("select * from game_role where id = 1", conn);

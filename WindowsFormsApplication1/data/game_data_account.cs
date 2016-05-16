@@ -1,6 +1,6 @@
 ﻿// gowinder@hotmail.com
 // gowinder.WindowsFormsApplication1
-// data_account.cs
+// game_data_account.cs
 // 2016-05-10-14:11
 
 #region
@@ -12,8 +12,10 @@ using gowinder.game_base_lib.data;
 
 namespace WindowsFormsApplication1.data
 {
-    internal class data_account : data_default_account
+    public class game_data_account : game_data_default_account
     {
+
+
         public List<data_item> list_item { get; set; }
         public List<data_fort> list_fort { get; set; }
 

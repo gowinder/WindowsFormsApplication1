@@ -21,13 +21,19 @@ namespace gowinder.http_service
 {
     public class http_listerner_service : service_base
     {
+        public static string default_name = "http_listerner_service";
         private uint _current_id;
 
         protected HttpListener _listener;
 
-        public http_listerner_service(string host_address)
+        public http_listerner_service(string host_address, string service_name = "")
         {
-            name = "http_listerner_service";
+            if (service_name == "")
+                name = default_name;
+            else
+            {
+                name = service_name;
+            }
             _listener = new HttpListener();
             _listener.Prefixes.Add(host_address);
         }

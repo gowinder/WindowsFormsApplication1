@@ -21,6 +21,8 @@ namespace gowinder.socket_service_lib
 {
     public class socket_service : service_base, i_net_context_manager
     {
+        public static string default_name = "socket_service";
+
         public enum service_type
         {
             server,
@@ -33,8 +35,14 @@ namespace gowinder.socket_service_lib
         private uint _socket_id;
 
 
-        public socket_service(service_type type)
+        public socket_service(service_type type, string service_name = "")
         {
+            if(service_name == "")
+                name = default_name;
+            else
+            {
+                name = service_name;
+            }
             server_cient_type = type;
             _lock_context_id = new object();
             _lock_dict_context = new object();

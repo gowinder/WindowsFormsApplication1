@@ -28,7 +28,7 @@ namespace gowinder.http_service_lib
 
         private readonly Dictionary<uint, net_context> dict_context;
 
-        private uint _context_id;
+        private uint _context_id = 1;
         protected object _lock_contect_id;
 
         protected object _lock_dict_context;
@@ -100,24 +100,43 @@ namespace gowinder.http_service_lib
             var mctx = find_by_id(info.context_id) as http_net_context;
             if (mctx == null)
                 throw new Exception("http_service.send_response info.context is not http_net_context");
-            Task.Run(async () =>
+            Task.Run( () =>
             {
                 var str = "";
                 if (info.package.data is JObject)
                     str = JsonConvert.SerializeObject(info.package.data);
                 else if (info.package.data is string)
-                    str = (string) info.package.data;
+                    str = (string)info.package.data;
                 else
                 {
                     throw new NotImplementedException("http_service.send_response info.package.data not support type");
                 }
                 var bb = Encoding.UTF8.GetBytes(str);
-                await mctx.ctx.Response.OutputStream.WriteAsync(bb, 0, bb.Length);
+                mctx.ctx.Response.OutputStream.Write(bb, 0, bb.Length);
                 mctx.ctx.Response.Close();
                 mctx.done = true;
                 Console.WriteLine("response in task, thread={0}, task={1}, id:{2}", Thread.CurrentThread.ManagedThreadId,
                     Task.CurrentId, mctx.id);
             });
+
+//             Task.Run(async () =>
+//             {
+//                 var str = "";
+//                 if (info.package.data is JObject)
+//                     str = JsonConvert.SerializeObject(info.package.data);
+//                 else if (info.package.data is string)
+//                     str = (string) info.package.data;
+//                 else
+//                 {
+//                     throw new NotImplementedException("http_service.send_response info.package.data not support type");
+//                 }
+//                 var bb = Encoding.UTF8.GetBytes(str);
+//                 await mctx.ctx.Response.OutputStream.WriteAsync(bb, 0, bb.Length);
+//                 mctx.ctx.Response.Close();
+//                 mctx.done = true;
+//                 Console.WriteLine("response in task, thread={0}, task={1}, id:{2}", Thread.CurrentThread.ManagedThreadId,
+//                     Task.CurrentId, mctx.id);
+//             });
 
             remove_by_id(mctx.id);
         }
