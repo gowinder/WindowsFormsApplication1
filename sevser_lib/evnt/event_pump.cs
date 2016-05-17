@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using gowinder.base_lib.service;
 
 #endregion
 

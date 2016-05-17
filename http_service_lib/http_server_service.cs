@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using gowinder.base_lib;
 using gowinder.base_lib.evnt;
+using gowinder.base_lib.service;
 using gowinder.http_service_lib.evnt;
 using gowinder.net_base;
 using gowinder.net_base.evnt;

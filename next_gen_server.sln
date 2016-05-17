@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gowinder.net_base", "gowind
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gowinder.socket_service_lib", "gowinder.socket_service_lib\gowinder.socket_service_lib.csproj", "{6A69E6F2-F591-4E26-9F24-8797DE8E9241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "game_logic_lib", "game_logic_lib\game_logic_lib.csproj", "{18DC39C4-448D-4172-92F3-2A2653952854}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gowinder.game_logic_lib", "game_logic_lib\gowinder.game_logic_lib.csproj", "{18DC39C4-448D-4172-92F3-2A2653952854}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

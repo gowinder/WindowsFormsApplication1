@@ -9,7 +9,7 @@ using NLog;
 
 #endregion
 
-namespace WindowsFormsApplication1
+namespace gowinder.server_console
 {
     internal class test_log
     {

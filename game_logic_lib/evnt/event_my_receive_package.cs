@@ -6,12 +6,12 @@
 #region
 
 using System;
-using WindowsFormsApplication1.service;
+using gowinder.game_logic_lib.service;
 using gowinder.net_base.evnt;
 
 #endregion
 
-namespace WindowsFormsApplication1.evnt
+namespace gowinder.game_logic_lib.evnt
 {
     internal class event_my_receive_package : event_receive_package
     {

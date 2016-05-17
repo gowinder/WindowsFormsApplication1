@@ -5,14 +5,14 @@
 
 #region
 
-using WindowsFormsApplication1.evnt;
 using gowinder.base_lib.evnt;
 using gowinder.database;
 using gowinder.database.evnt;
+using gowinder.game_logic_lib.evnt;
 
 #endregion
 
-namespace WindowsFormsApplication1
+namespace gowinder.game_logic_lib.service
 {
     public class my_async_load_db_service : async_load_db_service
     {

@@ -6,15 +6,20 @@
 #region
 
 using System.Collections.Generic;
+using gowinder.base_lib;
+using gowinder.base_lib.service;
 using gowinder.game_base_lib.data;
 
 #endregion
 
-namespace WindowsFormsApplication1.data
+namespace gowinder.game_logic_lib.data
 {
     public class game_data_account : game_data_default_account
     {
-
+        public game_data_account(service_base owner_service) : base(owner_service)
+        {
+            
+        }
 
         public List<data_item> list_item { get; set; }
         public List<data_fort> list_fort { get; set; }

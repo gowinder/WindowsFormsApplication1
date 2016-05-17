@@ -3,7 +3,7 @@
 // data_fort.cs
 // 2016-05-10-14:11
 
-namespace WindowsFormsApplication1.data
+namespace gowinder.game_logic_lib.data
 {
     public class data_fort
     {

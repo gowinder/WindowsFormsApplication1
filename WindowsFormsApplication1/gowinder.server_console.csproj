@@ -67,16 +67,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="data\data_role.cs" />
-    <Compile Include="data\game_data_account.cs" />
-    <Compile Include="data\data_fort.cs" />
-    <Compile Include="data\data_item.cs" />
-    <Compile Include="data\data_login.cs" />
-    <Compile Include="data\http_request_data.cs" />
-    <Compile Include="data\my_account_manager.cs" />
-    <Compile Include="evnt\event_my_async_load_db_request.cs" />
-    <Compile Include="evnt\event_my_async_load_db_response.cs" />
-    <Compile Include="evnt\event_my_receive_package.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,11 +74,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="http_requst_service.cs" />
-    <Compile Include="service\my_async_load_db_service.cs" />
     <Compile Include="my_db_event_builder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="service\my_logic_service.cs" />
     <Compile Include="test_log.cs" />
     <Compile Include="utility.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -133,9 +121,9 @@
       <Project>{c79ccfa4-872d-4343-bcdf-1c7735ce6ae5}</Project>
       <Name>gowinder.game_base_lib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\game_logic_lib\game_logic_lib.csproj">
+    <ProjectReference Include="..\game_logic_lib\gowinder.game_logic_lib.csproj">
       <Project>{18dc39c4-448d-4172-92f3-2a2653952854}</Project>
-      <Name>game_logic_lib</Name>
+      <Name>gowinder.game_logic_lib</Name>
     </ProjectReference>
     <ProjectReference Include="..\gowinder.net_base\gowinder.net_base.csproj">
       <Project>{a1a06dee-31af-41f3-ac82-33e5e345d6bf}</Project>

@@ -8,6 +8,7 @@
 using System;
 using System.Text;
 using gowinder.base_lib;
+using gowinder.base_lib.service;
 using gowinder.net_base;
 
 #endregion

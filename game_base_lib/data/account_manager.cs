@@ -81,7 +81,7 @@ namespace gowinder.game_base_lib.data
 
         protected virtual game_data_default_account on_create_account()
         {
-            return new game_data_default_account();
+            return new game_data_default_account(service);
         }
 
         public virtual game_data_default_account find_account_by_id(uint account_id)

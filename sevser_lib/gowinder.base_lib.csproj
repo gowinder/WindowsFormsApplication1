@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="evnt\base_event_builder.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="evnt\event_base.cs" />
     <Compile Include="evnt\event_pump.cs" />
     <Compile Include="evnt\event_stop_service.cs" />

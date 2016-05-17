@@ -7,13 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using WindowsFormsApplication1.service;
 using gowinder.database.evnt;
 using gowinder.game_base_lib.data;
+using gowinder.game_logic_lib.service;
 
 #endregion
 
-namespace WindowsFormsApplication1.data
+namespace gowinder.game_logic_lib.data
 {
     public class my_account_manager : account_manager
     {
@@ -55,7 +55,7 @@ namespace WindowsFormsApplication1.data
 
         protected override game_data_default_account on_create_account()
         {
-            return new game_data_account();
+            return new game_data_account(service);
         }
     }
 }

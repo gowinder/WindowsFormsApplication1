@@ -7,6 +7,7 @@
 
 using System;
 using gowinder.base_lib;
+using gowinder.base_lib.service;
 using gowinder.net_base.evnt;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

@@ -7,6 +7,7 @@
 
 using gowinder.base_lib;
 using gowinder.base_lib.evnt;
+using gowinder.base_lib.service;
 
 #endregion
 

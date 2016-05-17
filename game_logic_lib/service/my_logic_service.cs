@@ -5,15 +5,15 @@
 
 #region
 
-using WindowsFormsApplication1.data;
-using WindowsFormsApplication1.evnt;
 using gowinder.base_lib.evnt;
 using gowinder.database.evnt;
 using gowinder.game_base_lib;
+using gowinder.game_logic_lib.data;
+using gowinder.game_logic_lib.evnt;
 
 #endregion
 
-namespace WindowsFormsApplication1.service
+namespace gowinder.game_logic_lib.service
 {
     public class my_logic_service : logic_service
     {
@@ -25,7 +25,6 @@ namespace WindowsFormsApplication1.service
         protected override i_event_builder on_create_event_builder()
         {
             return new my_logic_service_event_builder();
-            ;
         }
 
         protected class my_logic_service_event_builder : logic_service_event_builder

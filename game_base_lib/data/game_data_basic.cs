@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text;
 using gowinder.base_lib;
+using gowinder.base_lib.service;
 using gowinder.database;
 using gowinder.database.evnt;
 using Newtonsoft.Json.Linq;

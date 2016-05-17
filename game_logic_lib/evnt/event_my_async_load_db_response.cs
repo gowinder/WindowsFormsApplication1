@@ -6,12 +6,12 @@
 #region
 
 using System;
-using WindowsFormsApplication1.service;
 using gowinder.database.evnt;
+using gowinder.game_logic_lib.service;
 
 #endregion
 
-namespace WindowsFormsApplication1.evnt
+namespace gowinder.game_logic_lib.evnt
 {
     [Serializable]
     public class event_my_async_load_db_response : event_async_load_db_response

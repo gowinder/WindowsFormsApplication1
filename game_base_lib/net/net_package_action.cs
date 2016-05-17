@@ -7,6 +7,7 @@
 
 using System;
 using gowinder.base_lib;
+using gowinder.base_lib.service;
 using gowinder.game_base_lib;
 using gowinder.game_base_lib.data;
 using gowinder.net_base;

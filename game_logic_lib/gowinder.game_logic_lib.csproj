@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,8 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="data\data_fort.cs" />
+    <Compile Include="data\data_item.cs" />
+    <Compile Include="data\data_role.cs" />
+    <Compile Include="data\game_data_account.cs" />
+    <Compile Include="data\my_account_manager.cs" />
+    <Compile Include="evnt\event_my_async_load_db_request.cs" />
+    <Compile Include="evnt\event_my_async_load_db_response.cs" />
+    <Compile Include="evnt\event_my_receive_package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="service\my_async_load_db_service.cs" />
+    <Compile Include="service\my_logic_service.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\database\gowinder.database.csproj">
@@ -68,6 +81,10 @@
       <Project>{8802d93e-4aaf-497b-a9cb-068a0d26a66c}</Project>
       <Name>gowinder.base_lib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

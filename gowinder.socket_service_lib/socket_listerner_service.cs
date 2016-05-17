@@ -8,6 +8,7 @@
 using System.Net;
 using System.Net.Sockets;
 using gowinder.base_lib;
+using gowinder.base_lib.service;
 using gowinder.net_base;
 
 #endregion

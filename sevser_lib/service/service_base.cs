@@ -11,7 +11,7 @@ using gowinder.base_lib.evnt;
 
 #endregion
 
-namespace gowinder.base_lib
+namespace gowinder.base_lib.service
 {
     public class service_base
     {

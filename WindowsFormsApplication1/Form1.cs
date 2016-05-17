@@ -10,9 +10,9 @@ using System.Text;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using WindowsFormsApplication1.data;
-using WindowsFormsApplication1.service;
 using gowinder.base_lib.service;
 using gowinder.database;
+using gowinder.game_logic_lib.service;
 using gowinder.http_service;
 using gowinder.http_service_lib;
 using gowinder.socket_service_lib;
@@ -51,20 +51,15 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var dl = new data_login {user_name = "test1", user_pwd = "1234", action_type = 1};
-
-            var serializer = new JavaScriptSerializer();
-            var json = serializer.Serialize(dl);
-            Console.WriteLine(json);
+            
+            
 
             var str_json =
                 @"{""user_name"":""test1"",""user_pwd"":""1234"",""type"":1,,""sub_type"":1,""_i"":1,""ret"":0, ""fuck"":""asdf""}";
             var jo = (JObject) JsonConvert.DeserializeObject(str_json);
             var zone = jo["fuck"].ToString();
 
-
-            var p1 = serializer.Deserialize<data_login>(str_json);
-            Console.WriteLine(p1.ToString());
+            
 
             /*
 

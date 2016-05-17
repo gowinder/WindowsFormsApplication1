@@ -6,6 +6,7 @@
 #region
 
 using System;
+using gowinder.base_lib.service;
 
 #endregion
 

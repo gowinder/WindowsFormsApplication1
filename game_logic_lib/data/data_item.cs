@@ -10,7 +10,7 @@ using MySql.Data.MySqlClient;
 
 #endregion
 
-namespace WindowsFormsApplication1.data
+namespace gowinder.game_logic_lib.data
 {
     public class data_item
     {

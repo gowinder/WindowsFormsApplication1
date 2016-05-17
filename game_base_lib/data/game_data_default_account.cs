@@ -7,6 +7,7 @@
 
 using System;
 using gowinder.base_lib;
+using gowinder.base_lib.service;
 using MySql.Data.MySqlClient;
 
 #endregion
@@ -36,7 +37,7 @@ namespace gowinder.game_base_lib.data
 
         public static string get_full_name(uint platform_id, string platform_user_id)
         {
-            return string.Format("_@{0}_@_{1}", platform_id, platform_user_id);
+            return $"_@{platform_id}_@_{platform_user_id}";
         }
 
         public void read_from_dataset(MySqlDataReader reader)
