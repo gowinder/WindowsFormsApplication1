@@ -13,6 +13,7 @@ using gowinder.base_lib;
 using gowinder.base_lib.service;
 using gowinder.database;
 using gowinder.database.evnt;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json.Linq;
 
 #endregion
@@ -51,6 +52,19 @@ namespace gowinder.game_base_lib.data
 
         protected abstract void init_fields();
 
+        public void read_from_datareader(MySqlDataReader reader)
+        {
+            if(reader.FieldCount != fields.Count && fields.Count != fields_name.Count)
+                throw new Exception("game_data_basic.reader_from_datareader table=" + table_name + ", reader.FieldCount != fields.Count or fields_name.Count");
+
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                fields[i] = reader[i];
+            }
+
+            clear_change_flags();
+        }
+
         public void save()
         {
             string str_sql = build_sql(this);
@@ -66,6 +80,14 @@ namespace gowinder.game_base_lib.data
                 event_save.set(service, async_save_db_service.instance, info);
                 event_save.send();
             }
+
+            clear_change_flags();
+        }
+
+        public void clear_change_flags()
+        {
+
+            fields_change = new BitVector32(0);
         }
 
         public void to_json(JObject json_root)
@@ -119,6 +141,8 @@ namespace gowinder.game_base_lib.data
             }
 
             json_root[table_name] = jobj;
+
+            clear_change_flags();
         }
 
         public void from_json(JObject json_root)

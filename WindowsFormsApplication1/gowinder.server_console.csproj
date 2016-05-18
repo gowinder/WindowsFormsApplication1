@@ -74,7 +74,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="http_requst_service.cs" />
-    <Compile Include="my_db_event_builder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="test_log.cs" />

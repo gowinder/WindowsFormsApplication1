@@ -47,11 +47,12 @@
     <Compile Include="data\data_fort.cs" />
     <Compile Include="data\data_item.cs" />
     <Compile Include="data\data_role.cs" />
-    <Compile Include="data\game_data_account.cs" />
+    <Compile Include="data\data_account.cs" />
     <Compile Include="data\my_account_manager.cs" />
     <Compile Include="evnt\event_my_async_load_db_request.cs" />
     <Compile Include="evnt\event_my_async_load_db_response.cs" />
     <Compile Include="evnt\event_my_receive_package.cs" />
+    <Compile Include="my_db_event_builder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="service\my_async_load_db_service.cs" />
     <Compile Include="service\my_logic_service.cs" />

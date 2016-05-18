@@ -21,10 +21,10 @@ namespace gowinder.game_logic_lib.data
         {
         }
 
-        protected override void on_rev_async_load_data(game_data_default_account default_account,
+        protected override void on_rev_async_load_data(data_default_account default_account,
             event_async_load_db_response response)
         {
-            var account = default_account as game_data_account;
+            var account = default_account as data_account;
             var res = response.data as async_load_db_response;
             if (res == null)
                 throw new Exception(
@@ -34,6 +34,12 @@ namespace gowinder.game_logic_lib.data
             {
                 switch (key)
                 {
+                    case data_role.tname:
+                    {
+                        account.role = load_data[key] as data_role;
+                        account.role.service = service;
+                    }
+                        break;
                     case "list_item":
                     {
                         account.list_item = load_data[key] as List<data_item>;
@@ -53,9 +59,9 @@ namespace gowinder.game_logic_lib.data
             base.init();
         }
 
-        protected override game_data_default_account on_create_account()
+        protected override data_default_account on_create_account()
         {
-            return new game_data_account(service);
+            return new data_account(service);
         }
     }
 }

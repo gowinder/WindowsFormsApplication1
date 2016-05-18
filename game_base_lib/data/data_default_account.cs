@@ -1,6 +1,6 @@
 ﻿// gowinder@hotmail.com
 // gowinder.game_base_lib
-// game_data_default_account.cs
+// data_default_account.cs
 // 2016-05-10-14:11
 
 #region
@@ -14,10 +14,12 @@ using MySql.Data.MySqlClient;
 
 namespace gowinder.game_base_lib.data
 {
-    public class game_data_default_account : game_data_basic
+    public class data_default_account : game_data_basic
     {
-        public game_data_default_account(service_base owner_serivce):base(owner_serivce)
+        public const string tname = "account";
+        public data_default_account(service_base owner_serivce):base(owner_serivce)
         {
+            table_name = tname;
             full_loaded = false;
         }
 

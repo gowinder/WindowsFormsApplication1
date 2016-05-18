@@ -14,6 +14,7 @@ namespace gowinder.game_logic_lib.data
 {
     public class data_item
     {
+        public const string tname = "game_role";
         public data_item()
         {
             change_set = new BitArray(4);

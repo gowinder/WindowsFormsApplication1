@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="data\account_async\async_load_account_wait_holder.cs" />
     <Compile Include="data\account_async\async_load_queue.cs" />
-    <Compile Include="data\game_data_default_account.cs" />
+    <Compile Include="data\data_default_account.cs" />
     <Compile Include="data\login_result.cs" />
     <Compile Include="data\game_data_basic.cs" />
     <Compile Include="evnt\event_logic_receive_package.cs" />

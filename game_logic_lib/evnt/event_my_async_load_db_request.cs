@@ -32,6 +32,12 @@ namespace gowinder.game_logic_lib.evnt
             }
             dict.Add("list_item", list_item);
 
+            str_sql = $"select * from game_role where account_id={account_id}";
+            reader = db.create_reader(str_sql);
+            var role = new data_role(null);
+            role.read_from_datareader(reader);
+            dict.Add(data_role.tname, role);
+
             return dict;
         }
     }

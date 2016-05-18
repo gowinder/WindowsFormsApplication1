@@ -1,6 +1,6 @@
 ﻿// gowinder@hotmail.com
 // gowinder.WindowsFormsApplication1
-// game_data_account.cs
+// data_account.cs
 // 2016-05-10-14:11
 
 #region
@@ -14,15 +14,16 @@ using gowinder.game_base_lib.data;
 
 namespace gowinder.game_logic_lib.data
 {
-    public class game_data_account : game_data_default_account
+    public class data_account : data_default_account
     {
-        public game_data_account(service_base owner_service) : base(owner_service)
+        public data_account(service_base owner_service) : base(owner_service)
         {
             
         }
 
         public List<data_item> list_item { get; set; }
         public List<data_fort> list_fort { get; set; }
+        public data_role role { get; set; }
 
         public override void clear_full_load()
         {

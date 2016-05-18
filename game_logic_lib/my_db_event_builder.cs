@@ -11,7 +11,7 @@ using gowinder.game_logic_lib.evnt;
 
 #endregion
 
-namespace WindowsFormsApplication1
+namespace gowinder.game_logic_lib
 {
     internal class my_db_event_builder : db_event_builder
     {
